@@ -1,0 +1,55 @@
+{
+  "profile": {
+    "name": "Iqbal Attila",
+    "tagline": "Cybersecurity enthusiast with part-time full-stack development experience.",
+    "location": "Jakarta, Indonesia",
+    "status": "Available for opportunities"
+  },
+  "sections": [
+    {
+      "title": "Information",
+      "items": [
+        {
+          "tag": "Curriculum Vitae",
+          "label": "Resume & Portfolio",
+          "url": "https://me.kcmon.id/",
+          "external": true
+        }
+      ]
+    },
+    {
+      "title": "Projects",
+      "items": [
+        {
+          "tag": "DEMO",
+          "label": "HiveCreator",
+          "url": "https://demohc.kcmon.id/",
+          "external": true
+        }
+      ]
+    },
+    {
+      "title": "Connect",
+      "items": [
+        {
+          "tag": "GITHUB",
+          "label": "GitHub",
+          "url": "https://github.com/aikazu",
+          "external": true
+        },
+        {
+          "tag": "LINKEDIN",
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/iqbalattila",
+          "external": true
+        },
+        {
+          "tag": "TWITTER",
+          "label": "X / Twitter",
+          "url": "https://x.com/Vystkailash",
+          "external": true
+        }
+      ]
+    }
+  ]
+}
