@@ -25,14 +25,31 @@
           "label": "HiveCreator",
           "url": "https://demohc.kcmon.id/",
           "external": true,
-          "techStack": ["nextjs", "netlify", "supabase"]
+          "techStack": [
+            "nextjs",
+            "netlify",
+            "supabase"
+          ]
         },
         {
           "tag": "Prototype",
           "label": "GaleHuntUI",
           "url": "https://github.com/aikazu/galehuntui",
           "external": true,
-          "techStack": ["python"]
+          "techStack": [
+            "python"
+          ]
+        },
+        {
+          "tag": "Pitch Deck",
+          "label": "HypeCreator Deck",
+          "url": "https://deck.kcmon.id",
+          "external": true,
+          "techStack": [
+            "nextjs",
+            "vercel",
+            "supabase"
+          ]
         }
       ]
     },
