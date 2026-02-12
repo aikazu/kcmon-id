@@ -32,6 +32,17 @@
           ]
         },
         {
+          "tag": "DEMO",
+          "label": "Poke Kcmon",
+          "url": "https://poke.kcmon.id/",
+          "external": true,
+          "techStack": [
+            "nextjs",
+            "vercel",
+            "supabase"
+          ]
+        },
+        {
           "tag": "Prototype",
           "label": "GaleHuntUI",
           "url": "https://github.com/aikazu/galehuntui",
