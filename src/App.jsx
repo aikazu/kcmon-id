@@ -211,8 +211,7 @@ export default function App() {
 
   return (
     <main
-      className="min-h-screen relative overflow-hidden"
-      style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}
+      className="h-screen w-screen overflow-hidden bg-[var(--background)] text-[var(--foreground)] relative"
     >
       <div className="grid-bg" />
       <div className="accent-glow" />
@@ -250,7 +249,14 @@ export default function App() {
           <ProfileFooter className="mt-0" />
         </div>
 
-        <div className="col-span-4 border-r border-[var(--border)] p-12 overflow-y-auto no-scrollbar">
+        <div className="col-span-4 border-r border-[var(--border)] p-12 overflow-y-auto no-scrollbar flex flex-col gap-14">
+          {infoSection && (
+            <Section 
+              section={infoSection} 
+              sectionIndex={getSectionIndex('Information')}
+              className="" 
+            />
+          )}
           {projectsSection && (
             <Section 
               section={projectsSection} 
@@ -260,19 +266,12 @@ export default function App() {
           )}
         </div>
 
-        <div className="col-span-4 p-12 overflow-y-auto no-scrollbar flex flex-col gap-14">
-          {infoSection && (
-            <Section 
-              section={infoSection} 
-              sectionIndex={getSectionIndex('Information')}
-              className="" 
-            />
-          )}
+        <div className="col-span-4 p-12 overflow-y-auto no-scrollbar">
           {connectSection && (
             <Section 
               section={connectSection} 
               sectionIndex={getSectionIndex('Connect')} 
-              className=""
+              className="mb-0"
             />
           )}
         </div>
