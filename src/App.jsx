@@ -1,17 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import data from "./data/data.json";
-import { 
-  ArrowUpRight, 
-  Sun, 
-  Moon, 
-  Github, 
-  Linkedin, 
-  Twitter,
-  FileText,
-  Layers,
-  ExternalLink,
-  Sparkles
-} from 'lucide-react';
+import { ArrowUpRight, Sun, Moon } from 'lucide-react';
 
 const { profile, sections } = data;
 
@@ -26,7 +15,7 @@ const techIcons = {
   },
   react: {
     name: 'React',
-    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38a2.167 2.167 0 0 0-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44a23.476 23.476 0 0 0-3.107-.534A23.892 23.892 0 0 0 12.769 4.7c1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442a22.73 22.73 0 0 0-3.113.538 15.02 15.02 0 0 1-.254-1.42c-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87a25.64 25.64 0 0 1-4.412.005 26.64 26.64 0 0 1-1.183-1.86c-.372-.64-.71-1.29-1.018-1.946a25.17 25.17 0 0 1 1.013-1.954c.38-.66.773-1.286 1.18-1.868A25.245 25.245 0 0 1 12 8.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933a25.952 25.952 0 0 0-1.345-2.32zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493a23.966 23.966 0 0 0-1.1-2.98c.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98a23.142 23.142 0 0 0-1.086 2.964c-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39a25.819 25.819 0 0 0 1.341-2.338zm-9.945.02c.22.39.453.778.7 1.162.24.38.487.758.74 1.128-.7-.1-1.376-.233-2.017-.39.186-.63.406-1.282.66-1.933l-.083.033zm4.717 2.97c-.459-.473-.917-.996-1.36-1.565.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565z"/></svg>`
+    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38a2.167 2.167 0 0 0-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44a23.476 23.476 0 0 0-3.107-.534A23.892 23.892 0 0 0 12.769 4.7c1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442a22.73 22.73 0 0 0-3.113.538 15.02 15.02 0 0 1-.254-1.42c-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87a25.64 25.64 0 0 1-4.412.005 26.64 26.64 0 0 1-1.183-1.86c-.372-.64-.71-1.29-1.018-1.946a25.17 25.17 0 0 1 1.013-1.954c.38-.66.773-1.286 1.18-1.868A25.245 25.245 0 0 1 12 8.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933a25.952 25.952 0 0 0-1.345-2.32zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493a23.966 23.966 0 0 0-1.1-2.98c.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98a23.142 23.142 0 0 0-1.086 2.964c-.484-.15-.944-.318-1.375-.498-1.732-.74-2.852-1.71-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.432-.18.89-.345 1.375-.497zm8.415 1.056a25.985 25.985 0 0 1 0 4.02c-.672.15-1.375.27-2.1.356a25.985 25.985 0 0 1-2.012-2.012 25.985 25.985 0 0 1 2.012-2.012c.725.088 1.428.207 2.1.356zm-5.19.57a25.985 25.985 0 0 1 0 2.88 25.268 25.268 0 0 1-1.456-.804 25.985 25.985 0 0 1 0-1.272c.456-.29.94-.56 1.456-.804zm7.074 0c.516.244 1 .513 1.456.804a25.985 25.985 0 0 1 0 1.272 25.268 25.268 0 0 1-1.456.804 25.985 25.985 0 0 1 0-2.88zM12 10.91c.35.35.674.717.974 1.094A12.58 12.58 0 0 1 12 12c-.34 0-.672-.003-.975-.006.3-.37.625-.737.975-1.084zm-4.36 1.7c.09.305.19.61.3.91-.11.3-.21.6-.3.91a24.476 24.476 0 0 1-1.4-.91c.43-.32.89-.63 1.4-.91zm8.72 0c.51.28.97.59 1.4.91a24.476 24.476 0 0 1-1.4.91c-.09-.31-.19-.61-.3-.91.11-.3.21-.605.3-.91zM12 13.09c.35.347.674.714.974 1.084-.302-.003-.635-.005-.974-.005s-.672.002-.975.005c.3-.37.625-.737.975-1.084zm-3.465.558c.24.377.48.763.704 1.16.225.39.435.782.635 1.174-.64-.15-1.315-.283-2.015-.386.18-.632.405-1.282.676-1.948zm6.93 0c.27.666.496 1.316.676 1.948-.7.103-1.375.236-2.015.386.2-.392.41-.784.635-1.174.224-.397.464-.783.704-1.16zm-3.465.91c.34.687.63 1.393.867 2.11-.57.07-1.157.11-1.754.12a16.15 16.15 0 0 1-.013-.002c-.595-.01-1.18-.05-1.74-.118.237-.717.527-1.423.867-2.11.26.003.52.005.773.005.26 0 .522-.002.78-.005zm5.02 1.316c.052.46.088.945.098 1.44a6.82 6.82 0 0 1-.558.128c-.666.382-.955 1.835-.73 3.704-.234.454-.497.885-.786 1.29-1.592-1.48-3.087-2.292-4.105-2.295v-.006a3.005 3.005 0 0 1-.558-.127c-.666-.382-.955-1.835-.73-3.704.054-.46.142-.945.25-1.44a23.476 23.476 0 0 0 3.107.534c.724.92 1.536 1.755 2.417 2.48-.686.72-1.37 1.537-2.02 2.442.956-.088 1.885-.26 2.765-.504z"/></svg>`
   },
   typescript: {
     name: 'TypeScript',
@@ -42,7 +31,7 @@ const techIcons = {
   },
   postgresql: {
     name: 'PostgreSQL',
-    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5594 14.7228a.5269.5269 0 0 0-.0563-.1191c-.139-.2632-.4768-.3418-1.0074-.2321-1.6533.3418-2.2993.1321-2.5698-.0563.7659-1.2573 1.4036-2.749 1.7997-4.2544.1558-.5765.2821-1.1733.3743-1.7533.2148-1.3505.1812-2.5911-.0981-3.6153-.3109-1.1391-3.9459-4.3747-7.0308-4.2556-1.7056.0657-3.0841.5765-4.0988 1.5158-.4393-.3949-1.0237-.7164-1.7478-.9483-1.4706-.4675-3.3181-.414-5.0818.1515-.5316.1702-.9483.3824-1.2478.6397l-.0235.0186c-1.071.8848-1.8094 2.239-2.1351 3.9192-.3275 1.6873-.2624 3.5628.1886 5.4169.0515.2118.1095.4366.1748.6747.4063 1.4859.9811 2.8628 1.7109 4.0983 1.0493 1.7754 2.3131 2.9478 3.6571 3.3936.4377.1452.8857.2176 1.3388.2176.4956 0 .9992-.0904 1.5032-.2714.6127-.22 1.1562-.5513 1.623-.9908.0375.0211.0752.0417.1134.0613.9891.5061 2.0924.7659 3.2814.7734 1.2147.0078 2.1851-.2103 2.8858-.6494.0217.1116.0389.2287.0515.3519.1442 1.3931.0373 2.5911-.3175 3.5592-.0609.1665-.1303.3246-.2068.4733-.0422.0819-.1537.258-.1152.4061.0479.1842.2361.2984.4929.2984.0515 0 .1059-.0047.1629-.0141.4061-.0657 1.1181-.2376 1.7568-.6241.9891-.5986 1.6533-1.5032 1.9724-2.6888.287-1.0667.3518-2.3305.1926-3.7598-.0485-.4329-.1022-.7992-.1629-1.1099.8693-.0892 1.559-.2868 2.0499-.5876.5795-.3546.8689-.7848.8598-1.2765-.0078-.4549-.2868-.7659-.5126-.9218zM5.6828 5.7967c-.1893-.4862-.2399-.9891-.1485-1.4929.0964-.532.3518-1.0079.7391-1.3797.0984-.0947.2036-.1813.3146-.2594-.1187.2742-.2133.5765-.2837.9082-.1596.8506-.1202 1.7478.1145 2.595.0562.2036.1237.4003.2003.5895-.3518-.1977-.6683-.4549-.936-.9607zm1.0504 11.9153c-1.0895-.3614-2.1202-1.3702-2.9954-2.9298-.6502-1.16-1.1609-2.4345-1.5221-3.7924-.0609-.2243-.1163-.4399-.1659-.6424-.4131-1.7026-.4675-3.4156-.1536-4.8328.2792-1.2612.8602-2.2859 1.6788-2.9625.0328-.0272.0668-.0534.1022-.0782-.0498.0829-.0957.1693-.1377.2594-.4722 1.0065-.5687 2.1912-.2711 3.3275.2103.803.5876 1.5592 1.0892 2.1898.4955.6241 1.1229 1.1286 1.8081 1.4565.343.1644.707.2914 1.0821.3779-.0282.0985-.0563.197-.0844.2955-.281.984-.5373 1.9896-.7618 2.9923-.2954 1.3198-.5003 2.5692-.6099 3.7156-.0376.3987-.0563.7754-.0563 1.1304.0005.3612.0249.6843.0725.9708-.1658-.0258-.3303-.0658-.4935-.1191zm9.4756 3.4111c-.207.2431-.4518.4466-.7278.605-.6232.3574-1.3889.501-2.2759.4268-.938-.0784-1.7922-.3406-2.5388-.779-.0462-.0272-.0905-.0555-.1333-.0844.6177-.0797 1.2491-.2431 1.8754-.4832.9811-.376 1.8881-.8907 2.7069-1.5366.1298-.1025.2607-.2089.3916-.3183-.0089.0993-.0192.199-.0308.2982-.0517.4426-.0792.9068-.0673 1.3729v.0005c-.0011.1672-.003.4109-.2.5981zm2.1094-10.1192c-.4094 1.4046-.9622 2.7918-1.6449 4.1251-.3087.6024-.6577 1.1609-1.0379 1.6704-.3802.5096-.7961.9779-1.2478 1.4002-.4517.4218-.9403.7974-1.4607 1.1229-.5199.3256-1.0734.6008-1.6533.8237-.7468.287-1.5175.4832-2.2893.5834.0798-.2447.1622-.5315.2483-.8627.2571-.9811.5154-1.9896.7659-2.9923.3519-1.4123.6346-2.7918.8408-4.1013.1066-.6766.1883-1.3309.2431-1.9513.0549-.6209.0798-1.2086.0751-1.7588a8.7642 8.7642 0 0 0-.0329-.8693c-.0244-.4503-.0704-.855-.1352-1.2086.3929.0265.7816.0823 1.1593.1665.9437.2103 1.8114.5765 2.5833 1.0911.7715.5141 1.4356 1.1671 1.9779 1.9435.5419.7764.9538 1.6689 1.2265 2.6577.172.623.2726 1.2854.2999 1.9779.0283.7045-.0306 1.3963-.1742 2.0604l-.0005-.0005z"/></svg>`
+    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.56 14.72c-.14-.26-.48-.34-1.01-.23-1.65.34-2.3.13-2.57-.06.77-1.26 1.4-2.75 1.8-4.25.16-.58.28-1.17.37-1.75.21-1.35.18-2.59-.1-3.62C21.74 3.68 18.1.45 15.02.57c-1.71.07-3.08.58-4.1 1.52-.44-.4-1.02-.72-1.75-.95C7.71.67 5.86.72 4.1 1.33c-.53.17-.95.38-1.25.64C1.79 2.85 1.04 4.21.72 5.89.39 7.57.46 9.45.91 11.31c.05.21.11.44.17.67.41 1.49.98 2.86 1.71 4.1 1.05 1.78 2.31 2.95 3.66 3.39.44.15.89.22 1.34.22.5 0 1-.09 1.5-.27.61-.22 1.16-.55 1.62-.99.04.02.08.04.11.06.99.51 2.09.77 3.28.77 1.21.01 2.19-.21 2.89-.65.02.11.04.23.05.35.14 1.39.04 2.59-.32 3.56-.06.17-.13.32-.21.47-.04.08-.15.26-.12.41.05.18.24.3.49.3.05 0 .11-.01.16-.01.41-.07 1.12-.24 1.76-.62.99-.6 1.65-1.5 1.97-2.69.29-1.07.35-2.33.19-3.76-.05-.43-.1-.8-.16-1.11.87-.09 1.56-.29 2.05-.59.58-.35.87-.78.86-1.28-.01-.45-.29-.77-.51-.92z"/></svg>`
   },
   vercel: {
     name: 'Vercel',
@@ -50,7 +39,7 @@ const techIcons = {
   },
   netlify: {
     name: 'Netlify',
-    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.934 8.519a1.044 1.044 0 0 1 .303.23l2.349-1.045-.652-1.542-2.602.584a1.04 1.04 0 0 1 .602 1.773zm6.192 5.294-3.05-3.052a.49.49 0 0 1-.076-.093l-2.296 1.022.004.009a1.04 1.04 0 0 1-.063 1.186h.001l2.296 2.296a.49.49 0 0 1 .063.072l2.666-.666zm-2.665-4.455-.008-.009.008.01zM5.9 10.932l5.14-2.29-.004-.004a1.04 1.04 0 0 1-.072-.206L5.9 10.932zm7.083 7.546a1.044 1.044 0 0 1-.18.412l1.543 1.543.76-3.041a1.04 1.04 0 0 1-.093-.014l-2.03 1.1zm.012-1.402 2.121-1.149a1.04 1.04 0 0 1-.058-.226l-4.058-1.204a1.04 1.04 0 0 1-.168.353l2.163 2.226zm4.848-6.466-2.349 1.045a1.04 1.04 0 0 1 .018.218l3.25.962.125-.501-1.044-1.724zm-.969 2.316 2.047 1.259-.031-.558-1.24-1.24a1.04 1.04 0 0 1-.776.539zm-1.704.255-4.058-1.205a1.04 1.04 0 0 1-.762.401l-.083 3.28a1.04 1.04 0 0 1 .306.076l4.597-2.552zm-5.006-1.078a1.04 1.04 0 0 1-.652-.315L5.9 10.932l-.005.008 5.038 1.795a1.04 1.04 0 0 1 .22-.132zm.147 1.472a1.04 1.04 0 0 1-.12-.254l-5.038-1.795.006-.007-1.333 5.324 6.568-3.554-.083.286zm.103 3.857 2.03-1.1a1.04 1.04 0 0 1-.078-.42l-4.597-2.553a1.04 1.04 0 0 1-.164.26l2.809 3.813zm-3.23.908 3.164 3.164.662-2.647a1.04 1.04 0 0 1-.375-.353l-3.451-.164zm5.755 3.674.663-2.651-.007-.003a1.04 1.04 0 0 1-1.175-.606l-3.164-3.164.663 6.424zM5.9 10.932zm-.005.008zm11.207-2.418a1.04 1.04 0 0 1-.068-.298l-1.69-1.69-1.503 6.013 2.296-1.022a1.04 1.04 0 0 1 .965-3.003z"/></svg>`
+    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.93 8.52a1.04 1.04 0 0 1 .3.23l2.35-1.05-.65-1.54-2.6.58a1.04 1.04 0 0 1 .6 1.78zm6.19 5.29-3.05-3.05a.49.49 0 0 1-.08-.09l-2.3 1.02a1.04 1.04 0 0 1-.06 1.19l2.3 2.3a.49.49 0 0 1 .06.07l2.67-.67zM5.9 10.93l5.14-2.29a1.04 1.04 0 0 1-.07-.21L5.9 10.93zm7.08 7.55a1.04 1.04 0 0 1-.18.41l1.54 1.54.76-3.04a1.04 1.04 0 0 1-.09-.01l-2.03 1.1zm.01-1.4 2.12-1.15a1.04 1.04 0 0 1-.06-.23l-4.06-1.2a1.04 1.04 0 0 1-.17.35l2.16 2.23zm4.85-6.47-2.35 1.05a1.04 1.04 0 0 1 .02.22l3.25.96.13-.5-1.04-1.72zm-.97 2.32 2.05 1.26-.03-.56-1.24-1.24a1.04 1.04 0 0 1-.78.54zm-1.7.26-4.06-1.21a1.04 1.04 0 0 1-.76.4l-.08 3.28a1.04 1.04 0 0 1 .31.08l4.6-2.55zm-5.01-1.08a1.04 1.04 0 0 1-.65-.32L5.9 10.93l5.04 1.8a1.04 1.04 0 0 1 .22-.13zm.15 1.47a1.04 1.04 0 0 1-.12-.25l-5.04-1.8-1.33 5.33 6.57-3.55zm.1 3.86 2.03-1.1a1.04 1.04 0 0 1-.08-.42l-4.6-2.55a1.04 1.04 0 0 1-.16.26l2.81 3.81zm-3.23.91 3.16 3.16.66-2.65a1.04 1.04 0 0 1-.38-.35l-3.45-.16zm5.76 3.67.66-2.65a1.04 1.04 0 0 1-1.18-.61l-3.16-3.16.66 6.42zM17.1 8.52a1.04 1.04 0 0 1-.07-.3l-1.69-1.69-1.5 6.01 2.3-1.02a1.04 1.04 0 0 1 .97-3z"/></svg>`
   },
   python: {
     name: 'Python',
@@ -61,128 +50,74 @@ const techIcons = {
 const TechStackIcon = ({ tech }) => {
   const techData = techIcons[tech.toLowerCase()];
   if (!techData) return null;
-  
+
   return (
-    <div 
-      className="tech-icon flex items-center justify-center w-6 h-6 rounded-md bg-[var(--muted)] text-[var(--muted-foreground)] transition-all duration-300 hover:bg-[var(--primary)] hover:text-[var(--primary-foreground)] hover:scale-110"
-      title={techData.name}
-    >
-      <div 
-        className="w-3.5 h-3.5"
+    <div className="tech-icon" title={techData.name}>
+      <div
+        className="tech-icon-inner"
         dangerouslySetInnerHTML={{ __html: techData.svg }}
       />
     </div>
   );
 };
 
-const getIcon = (label) => {
-  const l = label.toLowerCase();
-  if (l.includes('github')) return Github;
-  if (l.includes('linkedin')) return Linkedin;
-  if (l.includes('twitter') || l.includes('x')) return Twitter;
-  if (l.includes('cv') || l.includes('resume') || l.includes('portfolio')) return FileText;
-  return Layers;
-};
-
-const LinkCard = ({ item, index }) => {
-  const Icon = getIcon(item.label);
+const LinkRow = ({ item, index }) => {
   const hasTechStack = item.techStack && item.techStack.length > 0;
-  
+
   return (
     <a
       href={item.url}
       target={item.external ? "_blank" : "_self"}
       rel={item.external ? "noopener noreferrer" : ""}
-      className="link-card group flex items-center gap-4 p-4 animate-fade-up"
-      style={{ animationDelay: `${500 + index * 120}ms` }}
+      className="link-row animate-fade-up"
+      style={{ animationDelay: `${600 + index * 100}ms` }}
     >
-      <div className="icon-container relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--muted)] text-[var(--muted-foreground)]">
-        <Icon className="w-5 h-5 relative z-10" strokeWidth={1.5} />
-      </div>
-      
-      <div className="flex-1 min-w-0 relative z-10">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="font-mono text-[10px] font-medium tracking-widest text-[var(--primary)] uppercase">
-            {item.tag}
-          </span>
-          {item.external && (
-            <ExternalLink className="w-3 h-3 text-[var(--muted-foreground)] opacity-50" />
-          )}
+      <span className="link-tag">{item.tag}</span>
+      <span className="link-label">{item.label}</span>
+      {hasTechStack && (
+        <div className="flex items-center gap-1">
+          {item.techStack.map((tech) => (
+            <TechStackIcon key={tech} tech={tech} />
+          ))}
         </div>
-        <h3 className="card-label text-sm font-semibold text-[var(--foreground)] truncate transition-colors duration-300">
-          {item.label}
-        </h3>
-        {hasTechStack && (
-          <div className="flex items-center gap-1.5 mt-2">
-            {item.techStack.map((tech) => (
-              <TechStackIcon key={tech} tech={tech} />
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className="arrow-icon relative z-10">
-        <ArrowUpRight className="w-5 h-5 text-[var(--primary)]" />
-      </div>
+      )}
+      <span className="link-arrow">
+        <ArrowUpRight className="w-4 h-4" />
+      </span>
     </a>
   );
 };
 
 const Section = ({ section, sectionIndex }) => {
   const baseIndex = sectionIndex * 5;
-  
+  const sectionNum = String(sectionIndex + 1).padStart(2, '0');
+
   return (
-    <section className="mb-10">
-      <div 
-        className="flex items-center gap-3 mb-4 animate-fade-up"
-        style={{ animationDelay: `${400 + sectionIndex * 100}ms` }}
+    <section className="mb-14">
+      <div
+        className="section-header animate-fade-up"
+        style={{ animationDelay: `${500 + sectionIndex * 120}ms` }}
       >
-        <div className="relative">
-          <div className="h-2 w-2 rounded-full bg-[var(--primary)]" />
-          <div className="absolute inset-0 h-2 w-2 rounded-full bg-[var(--primary)] animate-ping opacity-75" />
-        </div>
-        <h2 className="font-serif text-sm font-normal italic tracking-wide text-[var(--muted-foreground)]">
-          {section.title}
-        </h2>
-        <div className="section-line flex-1 h-px bg-[var(--border)]" />
+        <span className="section-number animate-number" style={{ animationDelay: `${550 + sectionIndex * 120}ms` }}>
+          {sectionNum}
+        </span>
+        <span className="section-title">{section.title}</span>
+        <div
+          className="section-rule animate-reveal-line"
+          style={{ animationDelay: `${600 + sectionIndex * 120}ms` }}
+        />
       </div>
-      
-      <div className="space-y-3">
+
+      <div>
         {section.items.map((item, idx) => (
-          <LinkCard key={item.label} item={item} index={baseIndex + idx} />
+          <LinkRow key={item.label} item={item} index={baseIndex + idx} />
         ))}
       </div>
     </section>
   );
 };
 
-const MouseGlow = () => {
-  const glowRef = useRef(null);
-  
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (glowRef.current) {
-        glowRef.current.style.left = `${e.clientX}px`;
-        glowRef.current.style.top = `${e.clientY}px`;
-      }
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-  
-  return (
-    <div 
-      ref={glowRef}
-      className="fixed w-[300px] h-[300px] pointer-events-none z-0 opacity-20 transition-opacity duration-300"
-      style={{
-        background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)',
-        transform: 'translate(-50%, -50%)',
-        filter: 'blur(60px)',
-      }}
-    />
-  );
-};
+const nameParts = profile.name.split(' ');
 
 export default function App() {
   const [theme, setTheme] = useState('dark');
@@ -205,68 +140,71 @@ export default function App() {
   if (!mounted) return null;
 
   return (
-    <main 
+    <main
       className="min-h-screen relative overflow-hidden"
       style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}
     >
-      <div className="noise-overlay" />
-      <div className="gradient-orb gradient-orb-1" />
-      <div className="gradient-orb gradient-orb-2" />
-      <MouseGlow />
-      
-      <div className="max-w-md mx-auto px-5 py-16 sm:py-24 relative z-10">
-        
+      <div className="grid-bg" />
+      <div className="accent-glow" />
+
+      <div className="max-w-lg mx-auto px-6 py-20 sm:py-28 relative z-10">
+
         <button
           type="button"
           onClick={toggleTheme}
-          className="toggle-btn fixed top-5 right-5 p-3 rounded-xl z-50 animate-scale-in"
-          style={{ animationDelay: '200ms' }}
+          className="toggle-btn fixed top-6 right-6 z-50 animate-scale-in"
+          style={{ animationDelay: '100ms' }}
           aria-label="Toggle theme"
         >
-          <span className="relative z-10 block">
-            {theme === 'dark' ? (
-              <Sun className="w-4 h-4 text-[var(--muted-foreground)]" />
-            ) : (
-              <Moon className="w-4 h-4 text-[var(--muted-foreground)]" />
-            )}
-          </span>
+          {theme === 'dark' ? (
+            <Sun className="w-4 h-4" style={{ color: 'var(--muted-foreground)' }} />
+          ) : (
+            <Moon className="w-4 h-4" style={{ color: 'var(--muted-foreground)' }} />
+          )}
         </button>
 
-        <header className="text-center mb-16">
-          <div 
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] bg-[var(--card)] mb-6 animate-scale-in"
+        <header className="mb-20">
+          <div
+            className="status-badge mb-8 animate-slide-left"
             style={{ animationDelay: '0ms' }}
           >
-            <Sparkles className="w-3 h-3 text-[var(--primary)]" />
-            <span className="font-mono text-[10px] tracking-wider text-[var(--muted-foreground)] uppercase">
+            <span className="status-dot" />
+            <span className="font-mono text-[10px] tracking-wider uppercase" style={{ color: 'var(--muted-foreground)' }}>
               {profile.status}
             </span>
-            <span className="status-dot w-1.5 h-1.5 rounded-full bg-green-500" />
           </div>
-          
-          <h1 
-            className="font-serif text-4xl sm:text-5xl font-bold tracking-tight mb-4 animate-fade-up"
-            style={{ animationDelay: '100ms' }}
-          >
-            {profile.name}
+
+          <h1 className="hero-name text-6xl sm:text-8xl mb-6">
+            {nameParts.map((part, i) => (
+              <span
+                key={part}
+                className="block animate-slide-left"
+                style={{ animationDelay: `${100 + i * 150}ms` }}
+              >
+                <span className="accent-letter">{part[0]}</span>
+                {part.slice(1)}
+              </span>
+            ))}
           </h1>
-          
-          <p 
-            className="text-sm leading-relaxed max-w-sm mx-auto animate-fade-up"
-            style={{ color: 'var(--muted-foreground)', animationDelay: '200ms' }}
+
+          <p
+            className="hero-tagline text-sm sm:text-base max-w-xs leading-relaxed animate-fade-up"
+            style={{ animationDelay: '350ms' }}
           >
             {profile.tagline}
           </p>
-          
-          <div 
-            className="mt-6 flex items-center justify-center gap-2 animate-fade-up"
-            style={{ animationDelay: '300ms' }}
+
+          <div
+            className="mt-5 flex items-center gap-3 animate-fade-up"
+            style={{ animationDelay: '450ms' }}
           >
-            <div className="h-px w-8 bg-gradient-to-r from-transparent to-[var(--border)]" />
-            <span className="font-mono text-[10px] tracking-widest text-[var(--muted-foreground)] uppercase">
+            <div
+              className="h-px w-12 animate-reveal-line"
+              style={{ background: 'var(--primary)', animationDelay: '500ms' }}
+            />
+            <span className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'var(--muted-foreground)' }}>
               {profile.location}
             </span>
-            <div className="h-px w-8 bg-gradient-to-l from-transparent to-[var(--border)]" />
           </div>
         </header>
 
@@ -276,16 +214,19 @@ export default function App() {
           ))}
         </div>
 
-        <footer 
-          className="mt-20 pt-8 border-t text-center animate-fade-up"
-          style={{ borderColor: 'var(--border)', animationDelay: '1200ms' }}
+        <footer
+          className="mt-24 animate-fade-up"
+          style={{ animationDelay: '1400ms' }}
         >
-          <p 
-            className="font-mono text-[10px] tracking-widest uppercase"
-            style={{ color: 'var(--muted-foreground)' }}
-          >
-            © {new Date().getFullYear()} {profile.name}
-          </p>
+          <div className="footer-line mb-6" />
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'var(--muted-foreground)' }}>
+              © {new Date().getFullYear()} {profile.name}
+            </span>
+            <span className="font-mono text-[10px] tracking-wider" style={{ color: 'var(--border)' }}>
+              kcmon.id
+            </span>
+          </div>
         </footer>
 
       </div>
