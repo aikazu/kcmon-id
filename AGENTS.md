@@ -1,67 +1,69 @@
 # AI Agent Guardrails
 
-This document establishes strict guardrails for AI agents working on this codebase. All agents must adhere to these standards to ensure code quality, maintainability, and security.
+This document establishes strict guardrails for AI agents working on this Next.js codebase. All agents must adhere to these standards to ensure code quality, maintainability, and security.
 
-## 1. Code Quality
+## 1. Project Overview & Commands
 
-*   **Type Safety**:
-    *   **Strict No `any`**: Never use `any` type in TypeScript. Use `unknown` if the type is truly uncertain, and narrow it down with type guards.
-    *   **No Suppressions**: `// @ts-ignore` and `// @ts-nocheck` are strictly forbidden unless explicitly authorized by a human reviewer for a specific edge case.
-    *   **Return Types**: Explicitly define return types for all public functions and methods.
+*   **Stack**: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4.
+*   **Note**: The project structure has migrated from Vite to Next.js. The README references outdated files (e.g., `src/App.jsx`, `src/index.css`). Use the actual file structure (`src/app/`, `src/app/globals.css`).
+*   **Package Manager**: `bun`.
+*   **Key Commands**:
+    *   **Dev Server**: `bun run dev`
+    *   **Build**: `bun run build`
+    *   **Lint**: `bun run lint`
+    *   **Test**: (No test scripts currently configured. If adding tests, prefer Vitest).
 
-*   **Linting & Formatting**:
-    *   **Automated Checks**: All code must pass the project's linter (e.g., ESLint) and formatter (e.g., Prettier) configurations without errors or warnings.
-    *   **No Unused Code**: Remove unused variables, imports, and functions. Do not comment out unused code; delete it.
+## 2. Code Quality & Style
 
-*   **Testing**:
-    *   **Unit Tests**: New logic must be accompanied by unit tests covering positive and negative cases.
-    *   **Regression**: Ensure existing tests pass before submitting changes.
-    *   **Mocking**: specific external dependencies should be mocked to ensure tests are deterministic and fast.
+*   **TypeScript**:
+    *   **Strictness**: `tsconfig.json` may have `strict: false`, but **AI Agents MUST write strict TypeScript**.
+    *   **No `any`**: Use `unknown` or specific types. Avoid `any`.
+    *   **Explicit Types**:
+        *   **Return Types**: MANDATORY for all components and functions (e.g., `: React.JSX.Element`, `: void`).
+        *   **Hooks**: Use explicit generics (e.g., `useState<string>('dark')`).
+        *   **Props**: Define explicit interfaces for component props.
+    *   **Type Assertions**: Minimize `as unknown as Type`. Use Zod or proper type guards for data validation where possible.
 
-## 2. Code Maintainability
+*   **Formatting**:
+    *   **Indentation**: 2 spaces.
+    *   **Semicolons**: Always use semicolons.
+    *   **Quotes**: Prefer double quotes `"` for JSX attributes and strings (unless consistency dictates otherwise).
+    *   **Sorting**: Sort imports (React/Next first, then internal components, then types/styles).
 
-*   **Readability**:
-    *   **Self-Documenting Code**: Variable and function names must be descriptive and meaningful (e.g., `isUserLoggedIn` instead of `flag`).
-    *   **Complex Logic**: Add comments *only* to explain "why" complex logic exists, not "what" it does.
-    *   **Small Functions**: Keep functions small and focused on a single responsibility (SRP).
+*   **Naming Conventions**:
+    *   **Components**: PascalCase (e.g., `ProfileHeader.tsx`, `function ProfileHeader`).
+    *   **Functions/Variables**: camelCase (e.g., `toggleTheme`, `isMounted`).
+    *   **Files**:
+        *   Components: PascalCase (`src/components/Section.tsx`).
+        *   App Routes: kebab-case/standard Next.js (`page.tsx`, `layout.tsx`).
 
-*   **Structure**:
-    *   **File Organization**: Follow the existing project directory structure. Do not create new top-level directories without permission.
-    *   **DRY (Don't Repeat Yourself)**: Abstract repeated logic into reusable utility functions or components.
+## 3. Framework Specifics (Next.js 16 & React 19)
 
-*   **Dependencies**:
-    *   **Minimal additions**: Avoid adding new npm/pip packages if standard library or existing dependencies can solve the problem efficiently.
-    *   **Version Pinning**: Use exact versions or strictly semver-compatible ranges to prevent drift.
+*   **App Router**:
+    *   Use `src/app` directory structure.
+    *   **Server vs Client**: Default to Server Components. Add `"use client"` at the very top only when state (`useState`), effects (`useEffect`), or event listeners are needed.
+    *   **Note on `page.tsx`**: The main landing page is currently `"use client"` due to global theme state. When adding new pages, prefer Server Components if possible.
 
-## 3. Code Security
+*   **Styling (Tailwind CSS 4)**:
+    *   **Utility First**: Use Tailwind utility classes directly in JSX.
+    *   **Variables**: Use CSS variables for themes (e.g., `var(--background)`, `var(--foreground)`).
+    *   **Animations**: Use `src/app/globals.css` or Tailwind config for custom animations (e.g., `animate-scale-in`).
 
-*   **Input Validation**:
-    *   **Sanitization**: All external inputs (API params, query strings, user content) must be validated and sanitized (e.g., using Zod, Joi, or similar libraries).
-    *   **No SQL Injection**: Use parameterized queries or ORM methods. Never concatenate strings into SQL queries.
+*   **Icons**:
+    *   Use `lucide-react` for all icons.
 
-*   **Secrets Management**:
-    *   **No Hardcoded Secrets**: NEVER commit API keys, passwords, or tokens to git. Use environment variables (`.env`).
-    *   **Leak Prevention**: Do not log sensitive data (PII, tokens) to the console or log files.
+## 4. Data Management
 
-*   **Dependencies**:
-    *   **Audit**: Check for known vulnerabilities in added dependencies.
-    *   **Least Privilege**: Scripts and agents should run with the minimum necessary permissions.
+*   **Static Data**: Content is driven by `src/data/data.json`.
+*   **Modifying Content**: Do not hardcode text in components if it belongs in the data file. Update `data.json` and the corresponding types in `src/types/` if adding new fields.
 
-## 4. Framework & Stack Specifics
+## 5. Security & Best Practices
 
-*   **Next.js / React**:
-    *   **Server vs Client**: Default to Server Components. Add `"use client"` only when interactivity (hooks, event listeners) is required.
-    *   **Prop Types**: Always define explicit interfaces for component props (e.g., `interface MyComponentProps`).
-    *   **No Dangerous HTML**: Avoid `dangerouslySetInnerHTML`. If necessary for SVGs, use component-based SVG icons. For other content, use a sanitization library.
-    *   **Functional Components**: Use React Functional Components (`React.FC` or explicitly typed functions).
+*   **Secrets**: No hardcoded secrets. Use `.env` and `process.env`.
+*   **Deps**: Do not add new dependencies without explicit user request. Use existing `lucide-react`, `framer-motion` (if present), etc.
+*   **Clean Code**: Remove unused imports and variables before committing.
 
-*   **Styling (Tailwind CSS)**:
-    *   **Utility First**: Prefer Tailwind utility classes over custom CSS in `globals.css`.
-    *   **Consistency**: Use the defined color variables (e.g., `var(--background)`) for theming support.
+## 6. Testing (Future Proofing)
 
-*   **Project Structure**:
-    *   **`src/app/`**: Routes, layouts, and page-level orchestration only. Keep logic minimal.
-    *   **`src/components/`**: Reusable UI components. Small, focused, and typed.
-    *   **`src/data/`**: Static data and configuration files (JSON).
-    *   **`src/types/`**: Shared TypeScript interfaces and type definitions.
-
+*   If asked to write tests, assume **Vitest** + **React Testing Library** setup (due to Vite presence in devDeps), or standard Jest.
+*   Ensure components are testable by keeping logic separate from view where possible.

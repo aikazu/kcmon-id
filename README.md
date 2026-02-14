@@ -1,64 +1,97 @@
 <div align="center">
 
-# KCMON.ID
+# 🌌 KCMON.ID
 
-**Personal Landing Page**
+**Premium Personal Landing Page & Link Tree**
 
-[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=white)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev)
-[![Tailwind](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
-A premium, elegant landing page serving as a centralized hub for CV, project demos, and social links.
+A modern, elegant, and performance-optimized landing page designed to serve as a centralized hub for professional profiles, project portfolios, and social connections.
 
-[Live Demo](https://kcmon.id) · [Documentation](./docs/)
+[Live Demo](https://kcmon.id) · [Report Bug](https://github.com/aikazu/kcmon-id/issues)
 
 </div>
 
 ---
 
-## Features
+## ✨ Features
 
-- **Dark/Light Mode** — Toggle with localStorage persistence
-- **Elegant Animations** — Staggered fade-ups, hover effects, mouse-following glow
-- **Fully Configurable** — All content editable via single JSON file
-- **SEO Optimized** — Complete meta tags for social sharing
-- **Responsive** — Mobile-first design
-- **Fast** — Static site, ~65KB gzipped
+- **🌓 Dynamic Theming** — Seamless Light/Dark mode transition using OKLCH color space for superior perceptual uniformity.
+- **🎨 Visual Sophistication** — Features a responsive grid background, dynamic accent glows, and staggered fade-up animations.
+- **⚙️ Purely Configurable** — 100% of the content is driven by a single `data.json` file. No hardcoding required.
+- **📱 Responsive & Fluid** — Mobile-first design that looks stunning on every screen size.
+- **🚀 Built for Speed** — Leverages Next.js 16 App Router and React 19 for industry-leading performance.
+- **🔍 SEO Ready** — Pre-configured metadata for high visibility on search engines and social media.
 
-## Quick Start
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Framework** | [Next.js 16 (App Router)](https://nextjs.org/) |
+| **UI Library** | [React 19](https://react.dev/) |
+| **Language** | [TypeScript](https://www.typescriptlang.org/) |
+| **Styling** | [Tailwind CSS 4](https://tailwindcss.com/) |
+| **Icons** | [Lucide React](https://lucide.dev/) |
+| **Analytics** | [Vercel Speed Insights](https://vercel.com/docs/speed-insights) |
+
+## 🚀 Getting Started
+
+The project uses `bun` as the preferred package manager.
 
 ```bash
+# Clone the repository
+git clone https://github.com/aikazu/kcmon-id.git
+
 # Install dependencies
-npm install
+bun install
 
 # Start development server
-npm run dev
+bun run dev
 
 # Build for production
-npm run build
+bun run build
 ```
 
-## Configuration
+## 📂 Project Structure
 
-All content is managed in `src/data/data.json`:
+```bash
+src/
+├── app/
+│   ├── globals.css      # Tailwind 4 imports & OKLCH variables
+│   ├── layout.tsx       # Root layout, Fonts & Metadata
+│   └── page.tsx         # Main interactive landing page
+├── components/          # Atomic UI components
+├── data/
+│   └── data.json        # ← YOUR CONTENT GOES HERE
+├── types/               # TypeScript definitions
+└── utils/               # Helper functions
+```
+
+## ⚙️ Configuration
+
+Update your personal information in `src/data/data.json`:
 
 ```json
 {
   "profile": {
-    "name": "Your Name",
-    "tagline": "Your tagline here",
-    "location": "City, Country",
+    "name": "Iqbal Attila",
+    "tagline": "Cybersecurity enthusiast & Full-stack developer.",
+    "location": "Jakarta, Indonesia",
     "status": "Available for opportunities"
   },
   "sections": [
     {
-      "title": "Section Title",
+      "title": "Projects",
       "items": [
         {
-          "tag": "CATEGORY",
-          "label": "Link Label",
-          "url": "https://example.com",
-          "external": true
+          "tag": "DEMO",
+          "label": "Project Name",
+          "url": "https://project.com",
+          "external": true,
+          "techStack": ["nextjs", "vercel"]
         }
       ]
     }
@@ -66,66 +99,36 @@ All content is managed in `src/data/data.json`:
 }
 ```
 
-## Tech Stack
+## 🎨 Customization
 
-| Layer | Technology |
-|-------|------------|
-| Framework | React 19 |
-| Build | Vite 7 |
-| Styling | Tailwind CSS 4 |
-| Icons | Lucide React |
-
-## Project Structure
-
-```
-src/
-├── data/
-│   └── data.json      # ← Edit this file to update content
-├── App.jsx            # Main component
-├── index.css          # Styles & animations
-└── main.jsx           # Entry point
-```
-
-## Customization
-
-### Colors
-
-Edit CSS variables in `src/index.css`:
+### Colors (OKLCH)
+Theme colors are managed using OKLCH variables in `src/app/globals.css`. This allows for precise control over luminance and chroma across themes.
 
 ```css
 :root {
-  --primary: oklch(0.5054 0.1905 27.5181);  /* Wine red */
-  --background: oklch(0.2161 0.0061 56.0434); /* Dark brown */
-  /* ... */
+  --primary: oklch(0.72 0.17 45); /* Base accent */
+  --background: oklch(0.13 0.004 250);
 }
 ```
 
-### Fonts
+### Typography
+Fonts are loaded via `next/font/google` in `src/app/layout.tsx`:
+- **Outfit**: Primary sans-serif for body and labels.
+- **Instrument Serif**: Elegant italic serif for headings.
+- **JetBrains Mono**: Technical font for tags and numbers.
 
-Currently using:
-- **Libre Baskerville** — Display/headings
-- **Poppins** — Body text
-- **IBM Plex Mono** — Monospace/tags
+## 🚢 Deployment
 
-Change via the Google Fonts import in `src/index.css`.
+The easiest way to deploy is using the [Vercel Platform](https://vercel.com/new).
 
-## Deployment
+1. Push your code to GitHub.
+2. Import the repository into Vercel.
+3. Vercel will automatically detect Next.js and deploy.
 
-Build outputs static files to `dist/`. Deploy anywhere:
+---
 
-- Vercel
-- Netlify
-- Cloudflare Pages
-- GitHub Pages
+## 📄 License
 
-## Documentation
+Distributed under the MIT License. See `LICENSE` for more information.
 
-See [`docs/`](./docs/) for detailed specifications:
-
-- [Blueprint](./docs/blueprint.md) — Project overview & features
-- [Technical Spec](./docs/blueprint-tech.md) — Stack & architecture
-- [UI/UX Spec](./docs/blueprint-ui.md) — Design system & components
-
-## License
-
-MIT © Iqbal Attila
+Developed with ❤️ by [**Iqbal Attila**](https://github.com/aikazu)
