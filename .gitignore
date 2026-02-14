@@ -2,3 +2,11 @@ node_modules
 dist
 .DS_Store
 *.log
+.env
+.next
+.turbo
+bun.lock
+package-lock.json
+.yarn
+.yarnrc
+.yarnrc.yml
