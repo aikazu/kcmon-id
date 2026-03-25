@@ -1,15 +1,16 @@
-import { ArrowUpRight } from 'lucide-react';
-import React from 'react';
-import { Item } from '../types';
-import { TechStackIcon } from './TechStackIcon';
+import type { JSX } from "react";
+import { ArrowUpRight } from "lucide-react";
+import type { Item } from "../types";
+import { TechStackIcon } from "./TechStackIcon";
 
 interface LinkRowProps {
   item: Item;
   index: number;
 }
 
-export const LinkRow: React.FC<LinkRowProps> = ({ item, index }) => {
-  const hasTechStack = item.techStack && item.techStack.length > 0;
+export function LinkRow({ item, index }: LinkRowProps): JSX.Element {
+  const techStack = item.techStack ?? [];
+  const hasTechStack = techStack.length > 0;
 
   return (
     <a
@@ -23,7 +24,7 @@ export const LinkRow: React.FC<LinkRowProps> = ({ item, index }) => {
       <span className="link-label">{item.label}</span>
       {hasTechStack && (
         <div className="flex items-center gap-1">
-          {item.techStack!.map((tech) => (
+          {techStack.map((tech: string) => (
             <TechStackIcon key={tech} tech={tech} />
           ))}
         </div>
@@ -33,4 +34,4 @@ export const LinkRow: React.FC<LinkRowProps> = ({ item, index }) => {
       </span>
     </a>
   );
-};
+}

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Section as SectionType } from '../types';
-import { LinkRow } from './LinkRow';
+import type { JSX } from "react";
+import type { Section as SectionType } from "../types";
+import { LinkRow } from "./LinkRow";
 
 interface SectionProps {
   section: SectionType;
@@ -8,9 +8,13 @@ interface SectionProps {
   className?: string;
 }
 
-export const Section: React.FC<SectionProps> = ({ section, sectionIndex, className = "mb-14" }) => {
+export function Section({
+  section,
+  sectionIndex,
+  className = "mb-14",
+}: SectionProps): JSX.Element {
   const baseIndex = sectionIndex * 5;
-  const sectionNum = String(sectionIndex + 1).padStart(2, '0');
+  const sectionNum = String(sectionIndex + 1).padStart(2, "0");
 
   return (
     <section className={className}>
@@ -35,4 +39,4 @@ export const Section: React.FC<SectionProps> = ({ section, sectionIndex, classNa
       </div>
     </section>
   );
-};
+}
