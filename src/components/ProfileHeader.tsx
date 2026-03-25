@@ -57,6 +57,13 @@ export function ProfileHeader({
         {profile.tagline}
       </p>
 
+      <p
+        className="hero-summary mt-5 max-w-sm animate-fade-up"
+        style={{ animationDelay: "420ms" }}
+      >
+        {profile.summary}
+      </p>
+
       <div
         className="mt-5 flex items-center gap-3 animate-fade-up"
         style={{ animationDelay: "450ms" }}
@@ -68,6 +75,17 @@ export function ProfileHeader({
         <span className="font-mono text-[10px] tracking-widest uppercase" style={{ color: "var(--muted-foreground)" }}>
           {profile.location}
         </span>
+      </div>
+
+      <div
+        className="mt-6 flex flex-wrap gap-2 animate-fade-up"
+        style={{ animationDelay: "520ms" }}
+      >
+        {profile.specialties.map((specialty: string) => (
+          <span key={specialty} className="specialty-chip">
+            {specialty}
+          </span>
+        ))}
       </div>
     </header>
   );

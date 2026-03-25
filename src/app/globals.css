@@ -223,6 +223,26 @@ body {
   color: var(--muted-foreground);
 }
 
+.hero-summary {
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: color-mix(in oklch, var(--foreground) 72%, var(--muted-foreground));
+}
+
+.specialty-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklch, var(--card) 92%, transparent);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
 /* ═══════════════════════════════════════════
    SECTION HEADERS
    ═══════════════════════════════════════════ */
@@ -259,16 +279,25 @@ body {
   transform-origin: left;
 }
 
+.section-description {
+  margin: -4px 0 20px;
+  max-width: 36ch;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted-foreground);
+}
+
 /* ═══════════════════════════════════════════
    LINK ROWS
    ═══════════════════════════════════════════ */
 
 .link-row {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px 18px;
+  padding: 18px 0;
   border-bottom: 1px solid var(--border-subtle);
   text-decoration: none;
   color: var(--foreground);
@@ -299,6 +328,17 @@ body {
 .link-row:hover {
   padding-left: 8px;
   border-color: var(--border);
+}
+
+.link-row--featured::after {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 16px;
+  bottom: 16px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary), transparent);
+  opacity: 0.8;
 }
 
 .link-row:hover .link-label {
@@ -338,17 +378,52 @@ body {
   white-space: nowrap;
 }
 
+.link-row__topline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.link-year {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.link-copy {
+  min-width: 0;
+}
+
 .link-label {
   font-family: var(--font-outfit), sans-serif;
   font-size: 15px;
   font-weight: 500;
   color: var(--foreground);
   transition: color 0.35s ease;
-  flex: 1;
+  display: block;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.link-summary {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+.link-meta {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  min-height: 24px;
+  padding-top: 2px;
 }
 
 .link-arrow {
@@ -357,6 +432,8 @@ body {
   transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   color: var(--primary);
   flex-shrink: 0;
+  align-self: start;
+  margin-top: 2px;
 }
 
 .tech-icon {
@@ -483,6 +560,57 @@ body {
   background: linear-gradient(90deg, var(--primary), var(--border) 30%, var(--border) 70%, transparent);
 }
 
+.footer-shell {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.footer-copy {
+  max-width: 30ch;
+}
+
+.footer-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.footer-note {
+  margin: 0;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted-foreground);
+}
+
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.footer-cta:hover {
+  border-color: var(--primary);
+  background: color-mix(in oklch, var(--primary) 12%, transparent);
+  color: var(--primary);
+}
+
 /* ═══════════════════════════════════════════
    SCROLLBAR
    ═══════════════════════════════════════════ */
@@ -512,4 +640,25 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@media (max-width: 640px) {
+  .link-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .link-meta {
+    justify-content: flex-start;
+    padding-top: 0;
+  }
+
+  .link-arrow {
+    position: absolute;
+    right: 0;
+    top: 24px;
+  }
+
+  .footer-shell {
+    flex-direction: column;
+  }
 }

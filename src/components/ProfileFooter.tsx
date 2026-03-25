@@ -16,7 +16,21 @@ export function ProfileFooter({
       style={{ animationDelay: "1400ms" }}
     >
       <div className="footer-line mb-6" />
-      <div className="flex items-center justify-between">
+      <div className="footer-shell">
+        <div className="footer-copy">
+          <span className="footer-kicker">Next step</span>
+          <p className="footer-note">{profile.closingNote}</p>
+        </div>
+        <a
+          href={profile.cta.url}
+          target={profile.cta.external ? "_blank" : "_self"}
+          rel={profile.cta.external ? "noopener noreferrer" : ""}
+          className="footer-cta"
+        >
+          <span>{profile.cta.label}</span>
+        </a>
+      </div>
+      <div className="mt-6 flex items-center justify-between">
         <span className="font-mono text-[10px] tracking-widest uppercase" style={{ color: "var(--muted-foreground)" }}>
           © {new Date().getFullYear()} {profile.name}
         </span>
