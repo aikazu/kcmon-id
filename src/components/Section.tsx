@@ -32,15 +32,6 @@ export function Section({
         />
       </div>
 
-      {section.description ? (
-        <p
-          className="section-description animate-fade-up"
-          style={{ animationDelay: `${640 + sectionIndex * 120}ms` }}
-        >
-          {section.description}
-        </p>
-      ) : null}
-
       <div>
         {section.items.map((item, idx) => (
           <LinkRow key={item.label} item={item} index={baseIndex + idx} />
