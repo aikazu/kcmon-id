@@ -1,44 +1,47 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import data from "../data/data.json";
-import { Sun, Moon } from 'lucide-react';
-import { Data } from '../types';
-import { Section } from '../components/Section';
-import { ProfileHeader } from '../components/ProfileHeader';
-import { ProfileFooter } from '../components/ProfileFooter';
+import { ProfileFooter } from "../components/ProfileFooter";
+import { ProfileHeader } from "../components/ProfileHeader";
+import { Section } from "../components/Section";
+import type { Data, Section as SectionType } from "../types";
 
-const { profile, sections } = data as unknown as Data;
-
-
-
-
+const typedData: Data = data;
+const { profile, sections } = typedData;
 
 export default function App(): React.JSX.Element | null {
-  const [theme, setTheme] = useState<string>('dark');
+  const [theme, setTheme] = useState<string>("dark");
   const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('kcmon-theme') || 'dark';
+    const savedTheme = localStorage.getItem("kcmon-theme") ?? "dark";
     setTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
     setMounted(true);
   }, []);
 
   const toggleTheme = (): void => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
-    localStorage.setItem('kcmon-theme', newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem("kcmon-theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
   };
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return null;
+  }
 
-  const infoSection = sections.find(s => s.title === 'Information');
-  const projectsSection = sections.find(s => s.title === 'Projects');
-  const connectSection = sections.find(s => s.title === 'Connect');
+  const getSectionByTitle = (title: string): SectionType | undefined =>
+    sections.find((section: SectionType) => section.title === title);
 
-  const getSectionIndex = (title: string): number => sections.findIndex(s => s.title === title);
+  const infoSection = getSectionByTitle("Information");
+  const projectsSection = getSectionByTitle("Projects");
+  const connectSection = getSectionByTitle("Connect");
+
+  const getSectionIndex = (title: string): number =>
+    sections.findIndex((section: SectionType) => section.title === title);
 
   return (
     <main
@@ -51,13 +54,13 @@ export default function App(): React.JSX.Element | null {
         type="button"
         onClick={toggleTheme}
         className="toggle-btn fixed top-6 right-6 z-50 animate-scale-in"
-        style={{ animationDelay: '100ms' }}
+        style={{ animationDelay: "100ms" }}
         aria-label="Toggle theme"
       >
-        {theme === 'dark' ? (
-          <Sun className="w-4 h-4" style={{ color: 'var(--muted-foreground)' }} />
+        {theme === "dark" ? (
+          <Sun className="h-4 w-4" style={{ color: "var(--muted-foreground)" }} />
         ) : (
-          <Moon className="w-4 h-4" style={{ color: 'var(--muted-foreground)' }} />
+          <Moon className="h-4 w-4" style={{ color: "var(--muted-foreground)" }} />
         )}
       </button>
 
@@ -74,7 +77,6 @@ export default function App(): React.JSX.Element | null {
       </div>
 
       <div className="hidden lg:grid h-screen w-full grid-cols-12 relative z-10">
-        
         <div className="col-span-4 border-r border-[var(--border)] p-12 flex flex-col justify-between h-full">
           <ProfileHeader profile={profile} className="mb-0" />
           <ProfileFooter profile={profile} className="mt-0" />
@@ -82,16 +84,16 @@ export default function App(): React.JSX.Element | null {
 
         <div className="col-span-4 border-r border-[var(--border)] p-12 overflow-y-auto no-scrollbar flex flex-col gap-14">
           {infoSection && (
-            <Section 
-              section={infoSection} 
-              sectionIndex={getSectionIndex('Information')}
-              className="" 
+            <Section
+              section={infoSection}
+              sectionIndex={getSectionIndex("Information")}
+              className=""
             />
           )}
           {projectsSection && (
-            <Section 
-              section={projectsSection} 
-              sectionIndex={getSectionIndex('Projects')} 
+            <Section
+              section={projectsSection}
+              sectionIndex={getSectionIndex("Projects")}
               className="mb-0"
             />
           )}
@@ -99,14 +101,13 @@ export default function App(): React.JSX.Element | null {
 
         <div className="col-span-4 p-12 overflow-y-auto no-scrollbar">
           {connectSection && (
-            <Section 
-              section={connectSection} 
-              sectionIndex={getSectionIndex('Connect')} 
+            <Section
+              section={connectSection}
+              sectionIndex={getSectionIndex("Connect")}
               className="mb-0"
             />
           )}
         </div>
-
       </div>
     </main>
   );
