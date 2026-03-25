@@ -13,13 +13,13 @@ const { profile, sections } = typedData;
 
 export default function App(): React.JSX.Element | null {
   const [theme, setTheme] = useState<string>("dark");
-  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("kcmon-theme") ?? "dark";
-    setTheme(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme);
-    setMounted(true);
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const nextTheme = currentTheme === "light" || currentTheme === "dark" ? currentTheme : "dark";
+
+    setTheme(nextTheme);
+    document.documentElement.style.colorScheme = nextTheme;
   }, []);
 
   const toggleTheme = (): void => {
@@ -27,11 +27,8 @@ export default function App(): React.JSX.Element | null {
     setTheme(newTheme);
     localStorage.setItem("kcmon-theme", newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
+    document.documentElement.style.colorScheme = newTheme;
   };
-
-  if (!mounted) {
-    return null;
-  }
 
   const getSectionByTitle = (title: string): SectionType | undefined =>
     sections.find((section: SectionType) => section.title === title);
