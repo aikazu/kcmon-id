@@ -51,17 +51,17 @@ export default function App(): React.JSX.Element | null {
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
       aria-pressed={theme === "light"}
     >
-      <span className="toggle-btn__icon" aria-hidden="true">
-        {theme === "dark" ? (
-          <Sun className="h-4 w-4" />
-        ) : (
-          <Moon className="h-4 w-4" />
-        )}
+      <span className="toggle-btn__caption">Theme</span>
+      <span className="toggle-btn__track" aria-hidden="true">
+        <span className="toggle-btn__thumb">
+          {theme === "dark" ? (
+            <Moon className="h-3.5 w-3.5" />
+          ) : (
+            <Sun className="h-3.5 w-3.5" />
+          )}
+        </span>
       </span>
-      <span className="toggle-btn__meta">
-        <span className="toggle-btn__eyebrow">Theme</span>
-        <span className="toggle-btn__label">{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
-      </span>
+      <span className="toggle-btn__value">{theme === "dark" ? "Dark" : "Light"}</span>
     </button>
   );
 
