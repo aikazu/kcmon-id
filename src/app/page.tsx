@@ -43,6 +43,28 @@ export default function App(): React.JSX.Element | null {
   const getSectionIndex = (title: string): number =>
     sections.findIndex((section: SectionType) => section.title === title);
 
+  const themeToggle = (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className="toggle-btn"
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      aria-pressed={theme === "light"}
+    >
+      <span className="toggle-btn__icon" aria-hidden="true">
+        {theme === "dark" ? (
+          <Sun className="h-4 w-4" />
+        ) : (
+          <Moon className="h-4 w-4" />
+        )}
+      </span>
+      <span className="toggle-btn__meta">
+        <span className="toggle-btn__eyebrow">Theme</span>
+        <span className="toggle-btn__label">{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
+      </span>
+    </button>
+  );
+
   return (
     <main
       className="relative min-h-[100dvh] w-full overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] lg:h-screen lg:overflow-hidden"
@@ -50,22 +72,8 @@ export default function App(): React.JSX.Element | null {
       <div className="grid-bg" />
       <div className="accent-glow" />
 
-      <button
-        type="button"
-        onClick={toggleTheme}
-        className="toggle-btn fixed right-4 bottom-4 z-50 animate-scale-in sm:right-6 sm:bottom-6 lg:top-6 lg:right-6 lg:bottom-auto"
-        style={{ animationDelay: "100ms" }}
-        aria-label="Toggle theme"
-      >
-        {theme === "dark" ? (
-          <Sun className="h-4 w-4" style={{ color: "var(--muted-foreground)" }} />
-        ) : (
-          <Moon className="h-4 w-4" style={{ color: "var(--muted-foreground)" }} />
-        )}
-      </button>
-
       <div className="relative z-10 mx-auto max-w-lg px-6 py-20 pb-32 sm:py-28 sm:pb-36 lg:hidden">
-        <ProfileHeader profile={profile} />
+        <ProfileHeader profile={profile} topSlot={themeToggle} />
 
         <div>
           {sections.map((section, idx) => (
@@ -78,7 +86,7 @@ export default function App(): React.JSX.Element | null {
 
       <div className="hidden lg:grid h-screen w-full grid-cols-12 relative z-10">
         <div className="col-span-4 border-r border-[var(--border)] p-12 flex flex-col justify-between h-full">
-          <ProfileHeader profile={profile} className="mb-0" />
+          <ProfileHeader profile={profile} className="mb-0" topSlot={themeToggle} />
           <ProfileFooter profile={profile} className="mt-0" />
         </div>
 

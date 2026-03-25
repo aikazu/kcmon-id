@@ -1,27 +1,40 @@
 import type { JSX } from "react";
+import type { ReactNode } from "react";
 import type { Profile } from "../types";
 
 interface ProfileHeaderProps {
   profile: Profile;
   className?: string;
+  topSlot?: ReactNode;
 }
 
 export function ProfileHeader({
   profile,
   className = "mb-20",
+  topSlot,
 }: ProfileHeaderProps): JSX.Element {
   const nameParts = profile.name.split(" ");
 
   return (
     <header className={className}>
-      <div
-        className="status-badge mb-8 animate-slide-left"
-        style={{ animationDelay: "0ms" }}
-      >
-        <span className="status-dot" />
-        <span className="font-mono text-[10px] tracking-wider uppercase" style={{ color: "var(--muted-foreground)" }}>
-          {profile.status}
-        </span>
+      <div className="mb-8 flex items-start justify-between gap-4">
+        <div
+          className="status-badge animate-slide-left"
+          style={{ animationDelay: "0ms" }}
+        >
+          <span className="status-dot" />
+          <span className="font-mono text-[10px] tracking-wider uppercase" style={{ color: "var(--muted-foreground)" }}>
+            {profile.status}
+          </span>
+        </div>
+        {topSlot ? (
+          <div
+            className="animate-fade-up"
+            style={{ animationDelay: "120ms" }}
+          >
+            {topSlot}
+          </div>
+        ) : null}
       </div>
 
       <h1 className="hero-name text-6xl sm:text-8xl lg:text-7xl xl:text-8xl mb-6">
