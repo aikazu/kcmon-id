@@ -2,29 +2,49 @@
   "profile": {
     "name": "Iqbal Attila",
     "tagline": "Cybersecurity enthusiast with part-time full-stack development experience.",
+    "summary": "Building practical web products while keeping a strong eye on application security, delivery quality, and clean front-end execution.",
     "location": "Jakarta, Indonesia",
-    "status": "Available for opportunities"
+    "status": "Available for opportunities",
+    "specialties": [
+      "Application Security",
+      "Next.js",
+      "Supabase"
+    ],
+    "cta": {
+      "label": "View resume",
+      "url": "https://me.kcmon.id/",
+      "external": true
+    },
+    "closingNote": "Open to collaborative product work, security-minded frontend roles, and freelance builds that need a thoughtful finish."
   },
   "sections": [
     {
       "title": "Information",
+      "description": "Core background and portfolio context for a quick read.",
       "items": [
         {
           "tag": "Curriculum Vitae",
           "label": "Resume & Portfolio",
           "url": "https://me.kcmon.id/",
-          "external": true
+          "external": true,
+          "summary": "Background, selected work, and a fuller overview of experience and capabilities.",
+          "year": "2026",
+          "featured": true
         }
       ]
     },
     {
       "title": "Projects",
+      "description": "A small set of shipped demos, prototypes, and presentation artifacts.",
       "items": [
         {
           "tag": "DEMO",
           "label": "HiveCreator",
           "url": "https://demohc.kcmon.id/",
           "external": true,
+          "summary": "Creator-focused web product prototype with a modern app stack and deployment workflow.",
+          "year": "2026",
+          "featured": true,
           "techStack": [
             "nextjs",
             "netlify",
@@ -36,6 +56,8 @@
           "label": "Poke Kcmon",
           "url": "https://poke.kcmon.id/",
           "external": true,
+          "summary": "Playful side project that explores product polish, interaction design, and backend integration.",
+          "year": "2025",
           "techStack": [
             "nextjs",
             "vercel",
@@ -47,6 +69,8 @@
           "label": "GaleHuntUI",
           "url": "https://github.com/aikazu/galehuntui",
           "external": true,
+          "summary": "Early interface prototype published on GitHub as an exploration of workflow and tooling ideas.",
+          "year": "2025",
           "techStack": [
             "python"
           ]
@@ -56,6 +80,8 @@
           "label": "HypeCreator Deck",
           "url": "https://deck.kcmon.id",
           "external": true,
+          "summary": "Presentation layer for the product concept, focused on positioning and communication.",
+          "year": "2025",
           "techStack": [
             "nextjs",
             "vercel",
@@ -66,24 +92,32 @@
     },
     {
       "title": "Connect",
+      "description": "Where to find code, career context, and public updates.",
       "items": [
         {
           "tag": "GITHUB",
           "label": "GitHub",
           "url": "https://github.com/aikazu",
-          "external": true
+          "external": true,
+          "summary": "Code, experiments, and project repositories.",
+          "year": "Live"
         },
         {
           "tag": "LINKEDIN",
           "label": "LinkedIn",
           "url": "https://www.linkedin.com/in/iqbalattila",
-          "external": true
+          "external": true,
+          "summary": "Professional background, experience, and current availability.",
+          "year": "Live",
+          "featured": true
         },
         {
           "tag": "TWITTER",
           "label": "X / Twitter",
           "url": "https://x.com/Vystkailash",
-          "external": true
+          "external": true,
+          "summary": "Thoughts, updates, and public-facing activity.",
+          "year": "Live"
         }
       ]
     }

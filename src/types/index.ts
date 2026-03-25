@@ -1,8 +1,18 @@
 export interface Profile {
   name: string;
   tagline: string;
+  summary: string;
   location: string;
   status: string;
+  specialties: string[];
+  cta: CallToAction;
+  closingNote: string;
+}
+
+export interface CallToAction {
+  label: string;
+  url: string;
+  external: boolean;
 }
 
 export interface Item {
@@ -10,11 +20,15 @@ export interface Item {
   label: string;
   url: string;
   external: boolean;
+  summary?: string;
+  year?: string;
+  featured?: boolean;
   techStack?: string[];
 }
 
 export interface Section {
   title: string;
+  description?: string;
   items: Item[];
 }
 
