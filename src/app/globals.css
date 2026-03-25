@@ -55,6 +55,8 @@ html, body, #root {
 
 body {
   margin: 0;
+  min-height: 100dvh;
+  overflow-x: hidden;
   font-family: var(--font-outfit), sans-serif;
   background-color: var(--background);
   color: var(--foreground);
@@ -379,9 +381,17 @@ body {
 
 .toggle-btn {
   position: relative;
-  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  background: color-mix(in oklch, var(--card) 84%, transparent);
   border: 1px solid var(--border);
   padding: 10px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 14px 36px color-mix(in oklch, var(--background) 72%, transparent);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -393,6 +403,12 @@ body {
 
 .toggle-btn:active {
   transform: scale(0.92);
+}
+
+@media (max-width: 1023px) {
+  .toggle-btn {
+    border-color: color-mix(in oklch, var(--primary) 26%, var(--border));
+  }
 }
 
 /* ═══════════════════════════════════════════

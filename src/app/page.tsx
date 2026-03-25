@@ -45,7 +45,7 @@ export default function App(): React.JSX.Element | null {
 
   return (
     <main
-      className="h-screen w-screen overflow-hidden bg-[var(--background)] text-[var(--foreground)] relative"
+      className="relative min-h-[100dvh] w-full overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] lg:h-screen lg:overflow-hidden"
     >
       <div className="grid-bg" />
       <div className="accent-glow" />
@@ -53,7 +53,7 @@ export default function App(): React.JSX.Element | null {
       <button
         type="button"
         onClick={toggleTheme}
-        className="toggle-btn fixed top-6 right-6 z-50 animate-scale-in"
+        className="toggle-btn fixed right-4 bottom-4 z-50 animate-scale-in sm:right-6 sm:bottom-6 lg:top-6 lg:right-6 lg:bottom-auto"
         style={{ animationDelay: "100ms" }}
         aria-label="Toggle theme"
       >
@@ -64,7 +64,7 @@ export default function App(): React.JSX.Element | null {
         )}
       </button>
 
-      <div className="lg:hidden max-w-lg mx-auto px-6 py-20 sm:py-28 relative z-10">
+      <div className="relative z-10 mx-auto max-w-lg px-6 py-20 pb-32 sm:py-28 sm:pb-36 lg:hidden">
         <ProfileHeader profile={profile} />
 
         <div>
