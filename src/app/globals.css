@@ -327,6 +327,12 @@ body {
   min-width: 0;
 }
 
+.link-copy--stacked {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .link-label {
   font-family: var(--font-outfit), sans-serif;
   font-size: 15px;

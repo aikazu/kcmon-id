@@ -11,6 +11,8 @@ interface LinkRowProps {
 export function LinkRow({ item, index }: LinkRowProps): JSX.Element {
   const techStack = item.techStack ?? [];
   const hasTechStack = techStack.length > 0;
+  const shouldStackCopy = item.tag.length > 9;
+  const copyClassName = shouldStackCopy ? "link-copy link-copy--stacked" : "link-copy";
 
   return (
     <a
@@ -20,7 +22,7 @@ export function LinkRow({ item, index }: LinkRowProps): JSX.Element {
       className="link-row animate-fade-up"
       style={{ animationDelay: `${600 + index * 100}ms` }}
     >
-      <div className="link-copy">
+      <div className={copyClassName}>
         <span className="link-tag">{item.tag}</span>
         <span className="link-label">{item.label}</span>
       </div>
