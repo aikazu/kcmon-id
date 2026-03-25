@@ -1,4 +1,5 @@
-import { Instrument_Serif, Outfit, JetBrains_Mono } from "next/font/google";
+import type { Metadata } from "next";
+import { Instrument_Serif, JetBrains_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -18,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Iqbal Attila | kcmon.id",
   description: "Cybersecurity enthusiast with part-time full-stack development experience.",
   keywords: ["Iqbal Attila", "cybersecurity", "developer", "portfolio", "full-stack", "Jakarta"],
