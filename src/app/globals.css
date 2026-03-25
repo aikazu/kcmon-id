@@ -267,10 +267,10 @@ body {
 .link-row {
   position: relative;
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr) 20px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) auto 20px;
+  align-items: center;
   column-gap: 16px;
-  row-gap: 10px;
+  row-gap: 8px;
   padding: 18px 0;
   border-bottom: 1px solid var(--border-subtle);
   text-decoration: none;
@@ -308,7 +308,6 @@ body {
 .link-tag {
   display: inline-flex;
   width: fit-content;
-  align-self: start;
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 9px;
   font-weight: 500;
@@ -319,37 +318,40 @@ body {
   color: var(--muted-foreground);
   transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   white-space: nowrap;
-  margin-top: 2px;
+}
+
+.link-copy {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
 }
 
 .link-label {
   font-family: var(--font-outfit), sans-serif;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--foreground);
   transition: color 0.35s ease;
-  grid-column: 2 / 3;
   min-width: 0;
   white-space: normal;
-  line-height: 1.22;
-  text-wrap: pretty;
+  line-height: 1.25;
+  text-wrap: balance;
 }
 
 .link-tech {
   display: inline-flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-  grid-column: 2 / 3;
-  margin-top: -2px;
+  justify-self: end;
+  padding-right: 4px;
 }
 
 .link-arrow {
   grid-column: 3 / 4;
-  grid-row: 1 / span 2;
-  align-self: start;
+  align-self: center;
   justify-self: end;
-  opacity: 0.28;
+  opacity: 0.22;
   transform: translate(0, 0);
   transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   color: var(--primary);
@@ -463,24 +465,27 @@ body {
     padding: 16px 0;
   }
 
-  .link-tag {
-    grid-column: 1 / 2;
-    margin-top: 0;
+  .link-copy {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .link-label {
-    grid-column: 1 / 2;
     font-size: 17px;
     line-height: 1.28;
   }
 
   .link-tech {
     grid-column: 1 / 2;
+    justify-self: start;
+    padding-right: 0;
   }
 
   .link-arrow {
     grid-column: 2 / 3;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 2;
+    align-self: start;
     margin-top: 2px;
   }
 }

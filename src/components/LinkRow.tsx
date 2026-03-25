@@ -20,8 +20,10 @@ export function LinkRow({ item, index }: LinkRowProps): JSX.Element {
       className="link-row animate-fade-up"
       style={{ animationDelay: `${600 + index * 100}ms` }}
     >
-      <span className="link-tag">{item.tag}</span>
-      <span className="link-label">{item.label}</span>
+      <div className="link-copy">
+        <span className="link-tag">{item.tag}</span>
+        <span className="link-label">{item.label}</span>
+      </div>
       {hasTechStack ? (
         <div className="link-tech">
           {techStack.map((tech: string) => (
