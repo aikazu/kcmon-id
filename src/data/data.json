@@ -43,6 +43,17 @@
           ]
         },
         {
+          "tag": "Ongoing",
+          "label": "WunWun Vault",
+          "url": "https://wwvault.kcmon.id/",
+          "external": true,
+          "techStack": [
+            "nextjs",
+            "vercel",
+            "supabase"
+          ]
+        },
+        {
           "tag": "Prototype",
           "label": "GaleHuntUI",
           "url": "https://github.com/aikazu/galehuntui",
