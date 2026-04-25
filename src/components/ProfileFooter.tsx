@@ -39,7 +39,7 @@ export function ProfileFooter({
       className={`${className} animate-fade-up`}
       style={{ animationDelay: "1400ms" }}
     >
-      <div className="footer-line mb-6" />
+      <div className="footer-line mb-8" />
       <div className="flex items-center justify-between">
         <span className="font-mono text-[10px] tracking-widest uppercase" style={{ color: "var(--muted-foreground)" }}>
           © 2026 {profile.name}

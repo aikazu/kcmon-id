@@ -11,7 +11,7 @@ interface SectionProps {
 export function Section({
   section,
   sectionIndex,
-  className = "mb-14",
+  className = "mb-16",
 }: SectionProps): JSX.Element {
   const baseIndex = sectionIndex * 5;
   const sectionNum = String(sectionIndex + 1).padStart(2, "0");
