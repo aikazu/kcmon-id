@@ -21,9 +21,9 @@
       "title": "Projects",
       "items": [
         {
-          "tag": "DEMO",
-          "label": "HiveCreator",
-          "url": "https://demohc.kcmon.id/",
+          "tag": "Live",
+          "label": "Rirye (Creator E-Commerce)",
+          "url": "https://rirye.my.id/",
           "external": true,
           "techStack": [
             "nextjs",
@@ -44,7 +44,7 @@
         },
         {
           "tag": "Ongoing",
-          "label": "WunWun Vault",
+          "label": "WunWun Vault (TCG Shop E-Commerce)",
           "url": "https://wwvault.kcmon.id/",
           "external": true,
           "techStack": [
