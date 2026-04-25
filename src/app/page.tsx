@@ -90,8 +90,9 @@ export default function App(): React.JSX.Element | null {
     >
       <div className="grid-bg" />
       <div className="accent-glow" />
+      <div className="accent-glow-secondary" />
 
-      <div className="relative z-10 mx-auto max-w-lg px-6 py-20 pb-32 sm:py-28 sm:pb-36 lg:hidden">
+      <div className="relative z-10 mx-auto max-w-lg px-6 py-24 pb-32 sm:py-32 sm:pb-40 lg:hidden">
         <ProfileHeader profile={profile} topSlot={themeToggle} />
 
         <div>
@@ -109,7 +110,7 @@ export default function App(): React.JSX.Element | null {
           <ProfileFooter profile={profile} className="mt-0" />
         </div>
 
-        <div className="col-span-4 border-r border-[var(--border)] p-12 overflow-y-auto no-scrollbar flex flex-col gap-14">
+        <div className="col-span-4 border-r border-[var(--border)] p-12 overflow-y-auto no-scrollbar flex flex-col gap-16">
           {infoSection && (
             <Section
               section={infoSection}
