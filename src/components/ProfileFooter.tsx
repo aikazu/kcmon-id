@@ -18,7 +18,7 @@ export function ProfileFooter({
       <div className="footer-line mb-6" />
       <div className="flex items-center justify-between">
         <span className="font-mono text-[10px] tracking-widest uppercase" style={{ color: "var(--muted-foreground)" }}>
-          © {new Date().getFullYear()} {profile.name}
+          © 2026 {profile.name}
         </span>
         <span className="font-mono text-[10px] tracking-wider" style={{ color: "var(--border)" }}>
           kcmon.id

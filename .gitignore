@@ -10,3 +10,12 @@ package-lock.json
 .yarn
 .yarnrc
 .yarnrc.yml
+.sisyphus
+.env.local
+.env.development
+.env.development.local
+.env.production
+.env.production.local
+.env.test
+.env.test.local
+.env*.local

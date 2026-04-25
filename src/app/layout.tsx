@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { Instrument_Serif, JetBrains_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 
@@ -21,12 +21,28 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kcmon.id"),
   title: "Iqbal Attila | kcmon.id",
   description: "Cybersecurity enthusiast with part-time full-stack development experience.",
   keywords: ["Iqbal Attila", "cybersecurity", "developer", "portfolio", "full-stack", "Jakarta"],
   authors: [{ name: "Iqbal Attila" }],
   icons: {
     icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+  manifest: "/manifest.webmanifest",
+  openGraph: {
+    title: "Iqbal Attila | kcmon.id",
+    description: "Cybersecurity enthusiast with part-time full-stack development experience.",
+    url: "https://kcmon.id",
+    siteName: "kcmon.id",
+    locale: "id_ID",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Iqbal Attila | kcmon.id",
+    description: "Cybersecurity enthusiast with part-time full-stack development experience.",
   },
 };
 
@@ -52,10 +68,9 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <Script id="theme-init" strategy="beforeInteractive">
-          {themeScript}
-        </Script>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         {children}
+        <Analytics />
       </body>
     </html>
   );
