@@ -20,11 +20,12 @@ A modern, elegant, and performance-optimized landing page designed to serve as a
 ## ✨ Features
 
 - **🌓 Dynamic Theming** — Seamless Light/Dark mode transition using OKLCH color space for superior perceptual uniformity.
-- **🎨 Visual Sophistication** — Features a responsive grid background, dynamic accent glows, and staggered fade-up animations.
+- **🎨 Visual Sophistication** — Features a responsive grid background, dynamic accent glows, and scroll-triggered staggered animations.
 - **⚙️ Purely Configurable** — 100% of the content is driven by a single `data.json` file. No hardcoding required.
 - **📱 Responsive & Fluid** — Mobile-first design that looks stunning on every screen size.
 - **🚀 Built for Speed** — Leverages Next.js 16 App Router and React 19 for industry-leading performance.
 - **🔍 SEO Ready** — Pre-configured metadata for high visibility on search engines and social media.
+- **🔒 Security Hardened** — Ships with 7 security headers including CSP, HSTS, and X-Frame-Options.
 
 ## 🛠️ Tech Stack
 
@@ -35,7 +36,7 @@ A modern, elegant, and performance-optimized landing page designed to serve as a
 | **Language** | [TypeScript](https://www.typescriptlang.org/) |
 | **Styling** | [Tailwind CSS 4](https://tailwindcss.com/) |
 | **Icons** | [Lucide React](https://lucide.dev/) |
-| **Analytics** | [Vercel Speed Insights](https://vercel.com/docs/speed-insights) |
+| **Analytics** | [Vercel Analytics](https://vercel.com/docs/analytics) |
 
 ## 🚀 Getting Started
 
@@ -53,6 +54,9 @@ bun run dev
 
 # Build for production
 bun run build
+
+# Type-check (uses tsc, not ESLint)
+bun run lint
 ```
 
 ## 📂 Project Structure
@@ -60,14 +64,19 @@ bun run build
 ```bash
 src/
 ├── app/
-│   ├── globals.css      # Tailwind 4 imports & OKLCH variables
-│   ├── layout.tsx       # Root layout, Fonts & Metadata
-│   └── page.tsx         # Main interactive landing page
-├── components/          # Atomic UI components
+│   ├── globals.css      # OKLCH theme variables, animations, component styles
+│   ├── layout.tsx       # Root layout, fonts, metadata, analytics, theme script
+│   ├── page.tsx         # "use client" landing page with theme & scroll observer
+│   ├── error.tsx        # Error boundary (client component)
+│   ├── loading.tsx      # Loading spinner (server component)
+│   ├── not-found.tsx    # Custom 404 page
+│   ├── robots.ts        # robots.txt generation
+│   ├── sitemap.ts       # sitemap.xml generation
+│   └── manifest.ts      # Web app manifest
+├── components/          # UI components (PascalCase)
 ├── data/
-│   └── data.json        # ← YOUR CONTENT GOES HERE
-├── types/               # TypeScript definitions
-└── utils/               # Helper functions
+│   └── data.json        # ← ALL CONTENT GOES HERE
+└── types/               # TypeScript interfaces
 ```
 
 ## ⚙️ Configuration
@@ -78,7 +87,7 @@ Update your personal information in `src/data/data.json`:
 {
   "profile": {
     "name": "Iqbal Attila",
-    "tagline": "Cybersecurity enthusiast & Full-stack developer.",
+    "tagline": "Cybersecurity enthusiast with part-time full-stack development experience.",
     "location": "Jakarta, Indonesia",
     "status": "Available for opportunities"
   },
@@ -105,9 +114,12 @@ Update your personal information in `src/data/data.json`:
 Theme colors are managed using OKLCH variables in `src/app/globals.css`. This allows for precise control over luminance and chroma across themes.
 
 ```css
-:root {
-  --primary: oklch(0.72 0.17 45); /* Base accent */
+[data-theme="dark"] {
   --background: oklch(0.13 0.004 250);
+  --foreground: oklch(0.93 0.005 250);
+  --accent: oklch(0.72 0.17 45);
+  --border: oklch(0.22 0.005 250);
+  --muted-foreground: oklch(0.55 0.01 250);
 }
 ```
 

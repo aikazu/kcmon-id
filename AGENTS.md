@@ -1,69 +1,82 @@
 # AI Agent Guardrails
 
-This document establishes strict guardrails for AI agents working on this Next.js codebase. All agents must adhere to these standards to ensure code quality, maintainability, and security.
+## 1. Commands
 
-## 1. Project Overview & Commands
+- **Package Manager**: `bun` (not npm/yarn/pnpm)
+- `bun run dev` — dev server
+- `bun run build` — production build (Next.js Turbopack)
+- `bun run lint` — **this is `tsc --noEmit`, not ESLint**. Uses `tsconfig.lint.json` which extends `tsconfig.json` but scopes to `src/**`.
+- No test runner configured. If adding tests, use Vitest.
 
-*   **Stack**: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4.
-*   **Note**: The project structure has migrated from Vite to Next.js. The README references outdated files (e.g., `src/App.jsx`, `src/index.css`). Use the actual file structure (`src/app/`, `src/app/globals.css`).
-*   **Package Manager**: `bun`.
-*   **Key Commands**:
-    *   **Dev Server**: `bun run dev`
-    *   **Build**: `bun run build`
-    *   **Lint**: `bun run lint`
-    *   **Test**: (No test scripts currently configured. If adding tests, prefer Vitest).
+## 2. Stack
 
-## 2. Code Quality & Style
+- Next.js 16 (App Router), React 19, TypeScript 5.9, Tailwind CSS 4, Bun
+- `@vercel/analytics` for page analytics
+- `lucide-react` for icons — do not add other icon libraries
+- No ESLint, no Prettier, no formatter configured
 
-*   **TypeScript**:
-    *   **Strictness**: `tsconfig.json` may have `strict: false`, but **AI Agents MUST write strict TypeScript**.
-    *   **No `any`**: Use `unknown` or specific types. Avoid `any`.
-    *   **Explicit Types**:
-        *   **Return Types**: MANDATORY for all components and functions (e.g., `: React.JSX.Element`, `: void`).
-        *   **Hooks**: Use explicit generics (e.g., `useState<string>('dark')`).
-        *   **Props**: Define explicit interfaces for component props.
-    *   **Type Assertions**: Minimize `as unknown as Type`. Use Zod or proper type guards for data validation where possible.
+## 3. Architecture
 
-*   **Formatting**:
-    *   **Indentation**: 2 spaces.
-    *   **Semicolons**: Always use semicolons.
-    *   **Quotes**: Prefer double quotes `"` for JSX attributes and strings (unless consistency dictates otherwise).
-    *   **Sorting**: Sort imports (React/Next first, then internal components, then types/styles).
+Single-page personal landing site. All routes prerender as static (`○ Static`).
 
-*   **Naming Conventions**:
-    *   **Components**: PascalCase (e.g., `ProfileHeader.tsx`, `function ProfileHeader`).
-    *   **Functions/Variables**: camelCase (e.g., `toggleTheme`, `isMounted`).
-    *   **Files**:
-        *   Components: PascalCase (`src/components/Section.tsx`).
-        *   App Routes: kebab-case/standard Next.js (`page.tsx`, `layout.tsx`).
+```
+src/
+  app/
+    layout.tsx      — Root layout (Server Component), fonts, metadata, analytics, theme script
+    page.tsx        — "use client" landing page, theme state, IntersectionObserver for animations
+    globals.css     — All styles: OKLCH theme vars, animations, component styles
+    error.tsx       — Error boundary (client)
+    loading.tsx     — Loading spinner (server)
+    not-found.tsx   — 404 page (server)
+    robots.ts       — MetadataRoute.Robots
+    sitemap.ts      — MetadataRoute.Sitemap
+    manifest.ts     — MetadataRoute.Manifest (serves /manifest.webmanifest)
+  components/       — PascalCase files: ProfileHeader, ProfileFooter, Section, LinkRow, TechStackIcon, TechIcons
+  data/data.json    — All content (profile, sections with items). Components read from here.
+  types/index.ts    — Profile, Item, Section, Data interfaces
+```
 
-## 3. Framework Specifics (Next.js 16 & React 19)
+### Key patterns an agent must know
 
-*   **App Router**:
-    *   Use `src/app` directory structure.
-    *   **Server vs Client**: Default to Server Components. Add `"use client"` at the very top only when state (`useState`), effects (`useEffect`), or event listeners are needed.
-    *   **Note on `page.tsx`**: The main landing page is currently `"use client"` due to global theme state. When adding new pages, prefer Server Components if possible.
+- **Theme system**: `layout.tsx` injects an inline `<script dangerouslySetInnerHTML>` (not `next/script`) that reads `localStorage("kcmon-theme")` and sets `data-theme` on `<html>` before paint. `page.tsx` syncs this to React state. CSS uses `[data-theme="dark"]` / `[data-theme="light"]` selectors with OKLCH variables.
+- **Animations are scroll-aware**: CSS classes (`animate-fade-up`, `animate-slide-left`, etc.) start with `animation-play-state: paused`. A single `IntersectionObserver` in `page.tsx` adds `.in-view` to trigger `animation-play-state: running`. Do not remove this observer or the `.in-view` CSS rules.
+- **Content lives in `data.json`**: Do not hardcode text in components. Update `data.json` and `src/types/index.ts` if adding fields.
+- **Tech icons**: `TechIcons.tsx` maps slug strings (from `data.json` `techStack` arrays) to inline SVG components. When adding a new tech to data.json, add the corresponding icon entry.
 
-*   **Styling (Tailwind CSS 4)**:
-    *   **Utility First**: Use Tailwind utility classes directly in JSX.
-    *   **Variables**: Use CSS variables for themes (e.g., `var(--background)`, `var(--foreground)`).
-    *   **Animations**: Use `src/app/globals.css` or Tailwind config for custom animations (e.g., `animate-scale-in`).
+## 4. TypeScript
 
-*   **Icons**:
-    *   Use `lucide-react` for all icons.
+- `tsconfig.json` has `strict: true` — write strict TypeScript
+- `moduleResolution: "bundler"` — use ESM imports, not CommonJS
+- Path alias: `@/*` → `./src/*`
+- Two tsconfig files: `tsconfig.json` (build) and `tsconfig.lint.json` (lint, scoped to `src/`)
+- Next.js auto-corrects `jsx` from `"preserve"` to `"react-jsx"` during build — this is expected
 
-## 4. Data Management
+### Type conventions
 
-*   **Static Data**: Content is driven by `src/data/data.json`.
-*   **Modifying Content**: Do not hardcode text in components if it belongs in the data file. Update `data.json` and the corresponding types in `src/types/` if adding new fields.
+- **Return types**: MANDATORY on all functions and components (`: React.JSX.Element`, `: void`, etc.)
+- **Hook generics**: Explicit (e.g., `useState<string>("dark")`)
+- **Props**: Explicit interfaces
+- **No `any`**: Use `unknown` or specific types
+- **SVG icon components**: Type as `(props: React.SVGProps<SVGSVGElement>): React.JSX.Element`
 
-## 5. Security & Best Practices
+## 5. Style
 
-*   **Secrets**: No hardcoded secrets. Use `.env` and `process.env`.
-*   **Deps**: Do not add new dependencies without explicit user request. Use existing `lucide-react`, `framer-motion` (if present), etc.
-*   **Clean Code**: Remove unused imports and variables before committing.
+- 2-space indentation, semicolons always, double quotes preferred
+- Import order: React/Next → internal components → types/styles
+- Component files: PascalCase. Route files: Next.js conventions (`page.tsx`, `layout.tsx`)
+- Tailwind utility-first. Theme colors via CSS variables (`var(--background)`, `var(--foreground)`, `var(--accent)`, `var(--border)`, `var(--muted-foreground)`)
+- Custom animations defined in `globals.css` — do not duplicate in Tailwind config
 
-## 6. Testing (Future Proofing)
+## 6. Config & Security
 
-*   If asked to write tests, assume **Vitest** + **React Testing Library** setup (due to Vite presence in devDeps), or standard Jest.
-*   Ensure components are testable by keeping logic separate from view where possible.
+- `next.config.ts` sets 7 security headers (CSP, HSTS, X-Frame-Options, etc.) via `headers()`. When adding external resources (scripts, fonts, APIs), update the CSP `Content-Security-Policy` value.
+- `postcss.config.js` uses only `@tailwindcss/postcss` — no autoprefixer needed (Tailwind CSS 4 handles it via Lightning CSS)
+- No `.env` files in use currently. If adding, they are gitignored.
+
+## 7. Gotchas
+
+- **README is outdated**: References Vite-era files (`src/App.jsx`, `src/index.css`). Ignore it — use actual file structure.
+- **`bun.lock` is gitignored** but was previously tracked — it may show in diffs. This is intentional.
+- **Do not add dependencies** without explicit user request.
+- **`ProfileFooter.tsx` has a hardcoded year** (`2026`) instead of `new Date().getFullYear()` — this is intentional for static prerendering.
+- **`layout.tsx` is a Server Component** despite containing a `<script>` tag — the script uses `dangerouslySetInnerHTML`, not React state, so no `"use client"` needed.
