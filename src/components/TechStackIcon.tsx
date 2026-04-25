@@ -12,7 +12,7 @@ export function TechStackIcon({ tech }: TechStackIconProps): JSX.Element | null 
   }
 
   return (
-    <div className="tech-icon" title={techData.name}>
+    <div className="tech-icon" title={techData.name} aria-hidden="true">
       <div className="tech-icon-inner">
         <techData.Component />
       </div>

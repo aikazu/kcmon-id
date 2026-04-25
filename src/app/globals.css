@@ -31,14 +31,14 @@
   --secondary: oklch(0.94 0.006 80);
   --secondary-foreground: oklch(0.40 0.01 250);
   --muted: oklch(0.93 0.005 80);
-  --muted-foreground: oklch(0.45 0.01 250);
+  --muted-foreground: oklch(0.38 0.015 250);
   --accent: oklch(0.58 0.18 38);
   --accent-foreground: oklch(0.98 0.003 80);
   --border: oklch(0.88 0.006 80);
   --border-subtle: oklch(0.92 0.004 80);
   --ring: oklch(0.58 0.18 38);
   --glow: oklch(0.58 0.18 38 / 0.08);
-  --grid-color: oklch(0.92 0.003 80);
+  --grid-color: oklch(0.95 0.002 80);
 }
 
 * {
@@ -47,6 +47,8 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
 
 html, body, #root {
@@ -159,10 +161,12 @@ body {
 @keyframes number-reveal {
   from {
     opacity: 0;
-    transform: translateY(100%);
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
+    clip-path: inset(0 0 0 0);
     transform: translateY(0);
   }
 }
@@ -317,7 +321,7 @@ body {
 
 .link-row:hover .link-arrow {
   opacity: 1;
-  transform: translate(3px, -3px);
+  transform: translate(3px, -3px) rotate(-45deg) scale(1.05);
 }
 
 .link-row:hover .link-tag {
@@ -328,6 +332,11 @@ body {
 .link-row:hover .tech-icon {
   background: var(--primary);
   color: var(--primary-foreground);
+}
+
+.link-row:active {
+  transform: scale(0.985);
+  transition: transform 0.1s ease;
 }
 
 .link-tag {
@@ -341,7 +350,7 @@ body {
   padding: 5px 8px;
   border: 1px solid var(--border);
   color: var(--muted-foreground);
-  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   white-space: nowrap;
 }
 
@@ -384,7 +393,7 @@ body {
   justify-self: end;
   opacity: 0.22;
   transform: translate(0, 0);
-  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   color: var(--primary);
 }
 
@@ -396,7 +405,7 @@ body {
   height: 24px;
   background: var(--muted);
   color: var(--muted-foreground);
-  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tech-icon-inner {
@@ -551,6 +560,31 @@ body {
   background: linear-gradient(90deg, var(--primary), var(--border) 30%, var(--border) 70%, transparent);
 }
 
+.footer-back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--border);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-back-to-top:hover {
+  color: var(--primary);
+}
+
+.footer-back-to-top__icon {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-back-to-top:hover .footer-back-to-top__icon {
+  transform: translateY(-2px);
+}
+
 /* ═══════════════════════════════════════════
    SCROLLBAR
    ═══════════════════════════════════════════ */
@@ -566,6 +600,24 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--border);
   transition: background 0.3s ease;
+}
+
+
+/* ═══════════════════════════════════════════
+   FOCUS STATES
+   ═══════════════════════════════════════════ */
+
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.link-row:focus-visible {
+  border-color: var(--ring);
+}
+
+.toggle-btn:focus-visible .toggle-btn__track {
+  border-color: var(--ring);
 }
 
 

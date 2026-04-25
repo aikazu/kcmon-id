@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV === "development";
+
 const nextConfig = {
   async headers(): Promise<Awaited<ReturnType<NonNullable<NextConfig["headers"]>>>> {
     return [
@@ -11,8 +13,7 @@ const nextConfig = {
           { key: "X-XSS-Protection", value: "1; mode=block" },
           {
             key: "Content-Security-Policy",
-            value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' fonts.gstatic.com; connect-src 'self' vitals.vercel-insights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+            value: `default-src 'self'; script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' fonts.gstatic.com; connect-src 'self' vitals.vercel-insights.com${isDev ? " ws:" : ""}; frame-ancestors 'none'; base-uri 'self'; form-action 'self'`,
           },
           {
             key: "Referrer-Policy",
