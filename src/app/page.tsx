@@ -22,6 +22,28 @@ export default function App(): React.JSX.Element | null {
     document.documentElement.style.colorScheme = nextTheme;
   }, []);
 
+  useEffect(() => {
+    const animatedElements = document.querySelectorAll(
+      ".animate-fade-up, .animate-slide-left, .animate-scale-in, .animate-reveal-line, .animate-number"
+    );
+
+    const observer = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry: IntersectionObserverEntry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    animatedElements.forEach((el: Element) => observer.observe(el));
+
+    return (): void => { observer.disconnect(); };
+  }, []);
+
   const toggleTheme = (): void => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);

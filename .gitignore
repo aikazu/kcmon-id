@@ -19,3 +19,4 @@ package-lock.json
 .env.test
 .env.test.local
 .env*.local
+tsconfig.lint.tsbuildinfo
