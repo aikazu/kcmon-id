@@ -21,3 +21,4 @@ package-lock.json
 .env*.local
 tsconfig.lint.tsbuildinfo
 .playwright-mcp
+.pi-lens

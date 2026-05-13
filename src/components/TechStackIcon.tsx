@@ -5,7 +5,9 @@ interface TechStackIconProps {
   tech: string;
 }
 
-export function TechStackIcon({ tech }: TechStackIconProps): JSX.Element | null {
+export function TechStackIcon({
+  tech,
+}: TechStackIconProps): JSX.Element | null {
   const techData = techIcons[tech.toLowerCase()];
   if (!techData) {
     return null;
