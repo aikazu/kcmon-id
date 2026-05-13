@@ -25,53 +25,28 @@
           "label": "Rirye (Creator E-Commerce)",
           "url": "https://rirye.my.id/",
           "external": true,
-          "techStack": [
-            "nextjs",
-            "netlify",
-            "supabase"
-          ]
+          "techStack": ["nextjs", "netlify", "supabase"]
         },
         {
           "tag": "DEMO",
           "label": "Poke Kcmon",
           "url": "https://poke.kcmon.id/",
           "external": true,
-          "techStack": [
-            "nextjs",
-            "vercel",
-            "supabase"
-          ]
+          "techStack": ["nextjs", "vercel", "supabase"]
         },
         {
           "tag": "Ongoing",
           "label": "WunWun Vault (TCG Shop E-Commerce)",
           "url": "https://wwvault.kcmon.id/",
           "external": true,
-          "techStack": [
-            "nextjs",
-            "vercel",
-            "supabase"
-          ]
+          "techStack": ["nextjs", "vercel", "supabase"]
         },
         {
-          "tag": "Prototype",
-          "label": "GaleHuntUI",
-          "url": "https://github.com/aikazu/galehuntui",
+          "tag": "Ongoing",
+          "label": "KCMedia (Digital Media)",
+          "url": "https://wwvault.kcmon.id/",
           "external": true,
-          "techStack": [
-            "python"
-          ]
-        },
-        {
-          "tag": "Pitch Deck",
-          "label": "HypeCreator Deck",
-          "url": "https://deck.kcmon.id",
-          "external": true,
-          "techStack": [
-            "nextjs",
-            "vercel",
-            "supabase"
-          ]
+          "techStack": ["astro", "vercel", "supabase"]
         }
       ]
     },
