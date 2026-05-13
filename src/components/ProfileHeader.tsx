@@ -23,15 +23,15 @@ export function ProfileHeader({
           style={{ animationDelay: "0ms" }}
         >
           <span className="status-dot" />
-          <span className="font-mono text-[10px] tracking-wider uppercase" style={{ color: "var(--muted-foreground)" }}>
+          <span
+            className="font-mono text-[10px] tracking-wider uppercase"
+            style={{ color: "var(--muted-foreground)" }}
+          >
             {profile.status}
           </span>
         </div>
         {topSlot ? (
-          <div
-            className="animate-fade-up"
-            style={{ animationDelay: "120ms" }}
-          >
+          <div className="animate-fade-up" style={{ animationDelay: "100ms" }}>
             {topSlot}
           </div>
         ) : null}
@@ -42,7 +42,7 @@ export function ProfileHeader({
           <span
             key={part}
             className="block animate-slide-left"
-            style={{ animationDelay: `${100 + i * 150}ms` }}
+            style={{ animationDelay: `${80 + i * 100}ms` }}
           >
             <span className="accent-letter">{part[0]}</span>
             {part.slice(1)}
@@ -52,20 +52,23 @@ export function ProfileHeader({
 
       <p
         className="hero-tagline text-sm sm:text-base max-w-xs animate-fade-up"
-        style={{ animationDelay: "350ms" }}
+        style={{ animationDelay: "250ms" }}
       >
         {profile.tagline}
       </p>
 
       <div
         className="mt-6 flex items-center gap-3 animate-fade-up"
-        style={{ animationDelay: "450ms" }}
+        style={{ animationDelay: "320ms" }}
       >
         <div
           className="h-px w-14 animate-reveal-line"
-          style={{ background: "var(--primary)", animationDelay: "500ms" }}
+          style={{ background: "var(--primary)", animationDelay: "350ms" }}
         />
-        <span className="font-mono text-[10px] tracking-widest uppercase" style={{ color: "var(--muted-foreground)" }}>
+        <span
+          className="font-mono text-[10px] tracking-widest uppercase"
+          style={{ color: "var(--muted-foreground)" }}
+        >
           {profile.location}
         </span>
       </div>

@@ -6,7 +6,7 @@ import data from "../data/data.json";
 import { ProfileFooter } from "../components/ProfileFooter";
 import { ProfileHeader } from "../components/ProfileHeader";
 import { Section } from "../components/Section";
-import type { Data, Section as SectionType } from "../types";
+import type { Data } from "../types";
 
 const typedData: Data = data;
 const { profile, sections } = typedData;
@@ -16,7 +16,10 @@ export default function App(): React.JSX.Element | null {
 
   useEffect(() => {
     const currentTheme = document.documentElement.getAttribute("data-theme");
-    const nextTheme = currentTheme === "light" || currentTheme === "dark" ? currentTheme : "dark";
+    const nextTheme =
+      currentTheme === "light" || currentTheme === "dark"
+        ? currentTheme
+        : "dark";
 
     setTheme(nextTheme);
     document.documentElement.style.colorScheme = nextTheme;
@@ -24,7 +27,7 @@ export default function App(): React.JSX.Element | null {
 
   useEffect(() => {
     const animatedElements = document.querySelectorAll(
-      ".animate-fade-up, .animate-slide-left, .animate-scale-in, .animate-reveal-line, .animate-number"
+      ".animate-fade-up, .animate-slide-left, .animate-scale-in, .animate-reveal-line, .animate-number",
     );
 
     const observer = new IntersectionObserver(
@@ -36,12 +39,14 @@ export default function App(): React.JSX.Element | null {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
     );
 
     animatedElements.forEach((el: Element) => observer.observe(el));
 
-    return (): void => { observer.disconnect(); };
+    return (): void => {
+      observer.disconnect();
+    };
   }, []);
 
   const toggleTheme = (): void => {
@@ -51,16 +56,6 @@ export default function App(): React.JSX.Element | null {
     document.documentElement.setAttribute("data-theme", newTheme);
     document.documentElement.style.colorScheme = newTheme;
   };
-
-  const getSectionByTitle = (title: string): SectionType | undefined =>
-    sections.find((section: SectionType) => section.title === title);
-
-  const infoSection = getSectionByTitle("Information");
-  const projectsSection = getSectionByTitle("Projects");
-  const connectSection = getSectionByTitle("Connect");
-
-  const getSectionIndex = (title: string): number =>
-    sections.findIndex((section: SectionType) => section.title === title);
 
   const themeToggle = (
     <button
@@ -80,19 +75,20 @@ export default function App(): React.JSX.Element | null {
           )}
         </span>
       </span>
-      <span className="toggle-btn__value">{theme === "dark" ? "Dark" : "Light"}</span>
+      <span className="toggle-btn__value">
+        {theme === "dark" ? "Dark" : "Light"}
+      </span>
     </button>
   );
 
   return (
-    <main
-      className="relative min-h-[100dvh] w-full overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] lg:h-screen lg:overflow-hidden"
-    >
+    <main className="relative min-h-[100dvh] w-full overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] lg:h-screen lg:overflow-hidden">
       <div className="grid-bg" />
       <div className="accent-glow" />
       <div className="accent-glow-secondary" />
 
-      <div className="relative z-10 mx-auto max-w-lg px-6 py-24 pb-32 sm:py-32 sm:pb-40 lg:hidden">
+      {/* Mobile layout */}
+      <div className="relative z-10 mx-auto max-w-lg px-6 py-16 pb-24 sm:py-24 sm:pb-32 lg:hidden">
         <ProfileHeader profile={profile} topSlot={themeToggle} />
 
         <div>
@@ -104,37 +100,28 @@ export default function App(): React.JSX.Element | null {
         <ProfileFooter profile={profile} />
       </div>
 
+      {/* Desktop layout: 2-column (5-7) */}
       <div className="hidden lg:grid h-screen w-full grid-cols-12 relative z-10">
-        <div className="col-span-4 border-r border-[var(--border)] p-12 flex flex-col justify-between h-full">
-          <ProfileHeader profile={profile} className="mb-0" topSlot={themeToggle} />
+        <div className="col-span-5 border-r border-[var(--border)] p-12 flex flex-col justify-between h-full">
+          <ProfileHeader
+            profile={profile}
+            className="mb-0"
+            topSlot={themeToggle}
+          />
           <ProfileFooter profile={profile} className="mt-0" />
         </div>
 
-        <div className="col-span-4 border-r border-[var(--border)] p-12 overflow-y-auto no-scrollbar flex flex-col gap-16">
-          {infoSection && (
-            <Section
-              section={infoSection}
-              sectionIndex={getSectionIndex("Information")}
-              className=""
-            />
-          )}
-          {projectsSection && (
-            <Section
-              section={projectsSection}
-              sectionIndex={getSectionIndex("Projects")}
-              className="mb-0"
-            />
-          )}
-        </div>
-
-        <div className="col-span-4 p-12 overflow-y-auto no-scrollbar">
-          {connectSection && (
-            <Section
-              section={connectSection}
-              sectionIndex={getSectionIndex("Connect")}
-              className="mb-0"
-            />
-          )}
+        <div className="col-span-7 p-12 overflow-y-auto no-scrollbar scroll-hint-bottom">
+          <div className="max-w-2xl mx-auto flex flex-col gap-16">
+            {sections.map((section, idx) => (
+              <Section
+                key={section.title}
+                section={section}
+                sectionIndex={idx}
+                className="mb-0"
+              />
+            ))}
+          </div>
         </div>
       </div>
     </main>

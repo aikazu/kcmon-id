@@ -20,15 +20,18 @@ export function Section({
     <section className={className}>
       <div
         className="section-header animate-fade-up"
-        style={{ animationDelay: `${500 + sectionIndex * 120}ms` }}
+        style={{ animationDelay: `${280 + sectionIndex * 70}ms` }}
       >
-        <span className="section-number animate-number" style={{ animationDelay: `${550 + sectionIndex * 120}ms` }}>
+        <span
+          className="section-number animate-number"
+          style={{ animationDelay: `${320 + sectionIndex * 70}ms` }}
+        >
           {sectionNum}
         </span>
         <span className="section-title">{section.title}</span>
         <div
           className="section-rule animate-reveal-line"
-          style={{ animationDelay: `${600 + sectionIndex * 120}ms` }}
+          style={{ animationDelay: `${360 + sectionIndex * 70}ms` }}
         />
       </div>
 
