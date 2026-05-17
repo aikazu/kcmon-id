@@ -1,0 +1,7 @@
+node_modules
+.next
+dist
+bun.lock
+package-lock.json
+tsconfig.lint.tsbuildinfo
+.pi-lens
