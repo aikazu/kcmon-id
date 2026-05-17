@@ -13,19 +13,13 @@ export default function Error({ error, reset }: ErrorProps): React.JSX.Element {
 
       <div className="relative z-10 flex min-h-[100dvh] items-center justify-center px-6">
         <section className="w-full max-w-md border border-[var(--border)] bg-[var(--background)] p-6 font-mono text-sm">
-          <p className="mb-3 uppercase tracking-[0.18em] text-[var(--accent)]">
-            Error
-          </p>
-          <h1 className="mb-3 font-serif text-2xl italic tracking-tight">
-            Something went wrong.
-          </h1>
-          <p className="mb-6 leading-6 text-[var(--muted-foreground)]">
-            {error.message}
-          </p>
+          <p className="mb-3 tracking-[0.18em] text-[var(--accent)] uppercase">Error</p>
+          <h1 className="mb-3 font-serif text-2xl tracking-tight italic">Something went wrong.</h1>
+          <p className="mb-6 leading-6 text-[var(--muted-foreground)]">{error.message}</p>
           <button
             type="button"
             onClick={reset}
-            className="inline-flex items-center justify-center border border-[var(--border)] px-4 py-2 text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            className="inline-flex items-center justify-center border border-[var(--border)] px-4 py-2.5 text-[var(--foreground)] transition-all duration-300 hover:border-[var(--accent)] hover:bg-[var(--glow)] hover:text-[var(--accent)] active:scale-[0.98]"
           >
             Try again
           </button>
