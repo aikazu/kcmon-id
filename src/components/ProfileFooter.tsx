@@ -1,3 +1,5 @@
+"use client";
+
 import type { JSX } from "react";
 import type { Profile } from "../types";
 
@@ -30,15 +32,9 @@ function handleScrollToTop(): void {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-export function ProfileFooter({
-  profile,
-  className = "mt-24",
-}: ProfileFooterProps): JSX.Element {
+export function ProfileFooter({ profile, className = "mt-24" }: ProfileFooterProps): JSX.Element {
   return (
-    <footer
-      className={`${className} animate-fade-up`}
-      style={{ animationDelay: "800ms" }}
-    >
+    <footer className={`${className} animate-fade-up`} style={{ animationDelay: "800ms" }}>
       <div className="footer-line mb-8" />
       <div className="flex items-center justify-between">
         <span

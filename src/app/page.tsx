@@ -8,18 +8,14 @@ import { ProfileHeader } from "../components/ProfileHeader";
 import { Section } from "../components/Section";
 import type { Data } from "../types";
 
-const typedData: Data = data;
-const { profile, sections } = typedData;
+const { profile, sections } = data as Data;
 
 export default function App(): React.JSX.Element | null {
   const [theme, setTheme] = useState<string>("dark");
 
   useEffect(() => {
     const currentTheme = document.documentElement.getAttribute("data-theme");
-    const nextTheme =
-      currentTheme === "light" || currentTheme === "dark"
-        ? currentTheme
-        : "dark";
+    const nextTheme = currentTheme === "light" || currentTheme === "dark" ? currentTheme : "dark";
 
     setTheme(nextTheme);
     document.documentElement.style.colorScheme = nextTheme;
@@ -31,8 +27,8 @@ export default function App(): React.JSX.Element | null {
     );
 
     const observer = new IntersectionObserver(
-      (entries: IntersectionObserverEntry[]) => {
-        entries.forEach((entry: IntersectionObserverEntry) => {
+      (entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("in-view");
             observer.unobserve(entry.target);
@@ -42,7 +38,7 @@ export default function App(): React.JSX.Element | null {
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
     );
 
-    animatedElements.forEach((el: Element) => observer.observe(el));
+    animatedElements.forEach((el) => observer.observe(el));
 
     return (): void => {
       observer.disconnect();
@@ -68,16 +64,10 @@ export default function App(): React.JSX.Element | null {
       <span className="toggle-btn__caption">Theme</span>
       <span className="toggle-btn__track" aria-hidden="true">
         <span className="toggle-btn__thumb">
-          {theme === "dark" ? (
-            <Moon className="h-3.5 w-3.5" />
-          ) : (
-            <Sun className="h-3.5 w-3.5" />
-          )}
+          {theme === "dark" ? <Moon className="h-3.5 w-3.5" /> : <Sun className="h-3.5 w-3.5" />}
         </span>
       </span>
-      <span className="toggle-btn__value">
-        {theme === "dark" ? "Dark" : "Light"}
-      </span>
+      <span className="toggle-btn__value">{theme === "dark" ? "Dark" : "Light"}</span>
     </button>
   );
 
@@ -101,25 +91,16 @@ export default function App(): React.JSX.Element | null {
       </div>
 
       {/* Desktop layout: 2-column (5-7) */}
-      <div className="hidden lg:grid h-screen w-full grid-cols-12 relative z-10">
-        <div className="col-span-5 border-r border-[var(--border)] p-12 flex flex-col justify-between h-full">
-          <ProfileHeader
-            profile={profile}
-            className="mb-0"
-            topSlot={themeToggle}
-          />
+      <div className="relative z-10 hidden h-screen w-full grid-cols-12 lg:grid">
+        <div className="col-span-5 flex h-full flex-col justify-between border-r border-[var(--border)] p-12">
+          <ProfileHeader profile={profile} className="mb-0" topSlot={themeToggle} />
           <ProfileFooter profile={profile} className="mt-0" />
         </div>
 
-        <div className="col-span-7 p-12 overflow-y-auto no-scrollbar scroll-hint-bottom">
-          <div className="max-w-2xl mx-auto flex flex-col gap-16">
+        <div className="no-scrollbar scroll-hint-bottom col-span-7 overflow-y-auto p-12">
+          <div className="mx-auto flex max-w-2xl flex-col gap-16">
             {sections.map((section, idx) => (
-              <Section
-                key={section.title}
-                section={section}
-                sectionIndex={idx}
-                className="mb-0"
-              />
+              <Section key={section.title} section={section} sectionIndex={idx} className="mb-0" />
             ))}
           </div>
         </div>

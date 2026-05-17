@@ -1,7 +1,6 @@
 import type { JSX } from "react";
 import { ArrowUpRight } from "lucide-react";
 import type { Item } from "../types";
-import { TechStackIcon } from "./TechStackIcon";
 import { techIcons } from "./TechIcons";
 
 interface LinkRowProps {
@@ -13,14 +12,12 @@ export function LinkRow({ item, index }: LinkRowProps): JSX.Element {
   const techStack = item.techStack ?? [];
   const hasTechStack = techStack.length > 0;
   const shouldStackCopy = item.tag.length > 9;
-  const copyClassName = shouldStackCopy
-    ? "link-copy link-copy--stacked"
-    : "link-copy";
+  const copyClassName = shouldStackCopy ? "link-copy link-copy--stacked" : "link-copy";
   const isFeatured = item.tag.toLowerCase() === "live";
   const rowClassName = `link-row animate-fade-up${isFeatured ? " link-row--featured" : ""}`;
 
   const techLabel = hasTechStack
-    ? `Built with ${techStack.map((t: string) => techIcons[t.toLowerCase()]?.name ?? t).join(", ")}`
+    ? `Built with ${techStack.map((t) => techIcons[t.toLowerCase()]?.name ?? t).join(", ")}`
     : undefined;
 
   return (
@@ -37,13 +34,21 @@ export function LinkRow({ item, index }: LinkRowProps): JSX.Element {
       </div>
       {hasTechStack ? (
         <div className="link-tech" aria-label={techLabel}>
-          {techStack.map((tech: string) => (
-            <TechStackIcon key={tech} tech={tech} />
-          ))}
+          {techStack.map((tech) => {
+            const techData = techIcons[tech.toLowerCase()];
+            if (!techData) return null;
+            return (
+              <div key={tech} className="tech-icon" title={techData.name} aria-hidden="true">
+                <div className="tech-icon-inner">
+                  <techData.Component />
+                </div>
+              </div>
+            );
+          })}
         </div>
       ) : null}
       <span className="link-arrow">
-        <ArrowUpRight className="w-4 h-4" />
+        <ArrowUpRight className="h-4 w-4" />
       </span>
     </a>
   );
