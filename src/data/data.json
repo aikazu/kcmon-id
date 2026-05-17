@@ -47,6 +47,13 @@
           "url": "https://wwvault.kcmon.id/",
           "external": true,
           "techStack": ["astro", "vercel", "supabase"]
+        },
+        {
+          "tag": "Ongoing",
+          "label": "Kelola-Event (Automotive EO Management)",
+          "url": "https://kelola-event.kcmon.id/",
+          "external": true,
+          "techStack": ["nextjs", "vercel", "supabase"]
         }
       ]
     },

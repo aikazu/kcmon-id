@@ -29,14 +29,14 @@ A modern, elegant, and performance-optimized landing page designed to serve as a
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-| :--- | :--- |
-| **Framework** | [Next.js 16 (App Router)](https://nextjs.org/) |
-| **UI Library** | [React 19](https://react.dev/) |
-| **Language** | [TypeScript](https://www.typescriptlang.org/) |
-| **Styling** | [Tailwind CSS 4](https://tailwindcss.com/) |
-| **Icons** | [Lucide React](https://lucide.dev/) |
-| **Analytics** | [Vercel Analytics](https://vercel.com/docs/analytics) |
+| Layer          | Technology                                            |
+| :------------- | :---------------------------------------------------- |
+| **Framework**  | [Next.js 16 (App Router)](https://nextjs.org/)        |
+| **UI Library** | [React 19](https://react.dev/)                        |
+| **Language**   | [TypeScript](https://www.typescriptlang.org/)         |
+| **Styling**    | [Tailwind CSS 4](https://tailwindcss.com/)            |
+| **Icons**      | [Lucide React](https://lucide.dev/)                   |
+| **Analytics**  | [Vercel Analytics](https://vercel.com/docs/analytics) |
 
 ## 🚀 Getting Started
 
@@ -111,6 +111,7 @@ Update your personal information in `src/data/data.json`:
 ## 🎨 Customization
 
 ### Colors (OKLCH)
+
 Theme colors are managed using OKLCH variables in `src/app/globals.css`. This allows for precise control over luminance and chroma across themes.
 
 ```css
@@ -124,7 +125,9 @@ Theme colors are managed using OKLCH variables in `src/app/globals.css`. This al
 ```
 
 ### Typography
+
 Fonts are loaded via `next/font/google` in `src/app/layout.tsx`:
+
 - **Outfit**: Primary sans-serif for body and labels.
 - **Instrument Serif**: Elegant italic serif for headings.
 - **JetBrains Mono**: Technical font for tags and numbers.

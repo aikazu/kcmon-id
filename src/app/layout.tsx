@@ -23,16 +23,8 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://kcmon.id"),
   title: "Iqbal Attila | kcmon.id",
-  description:
-    "Cybersecurity enthusiast with part-time full-stack development experience.",
-  keywords: [
-    "Iqbal Attila",
-    "cybersecurity",
-    "developer",
-    "portfolio",
-    "full-stack",
-    "Jakarta",
-  ],
+  description: "Cybersecurity enthusiast with part-time full-stack development experience.",
+  keywords: ["Iqbal Attila", "cybersecurity", "developer", "portfolio", "full-stack", "Jakarta"],
   authors: [{ name: "Iqbal Attila" }],
   icons: {
     icon: "/favicon.svg",
@@ -41,8 +33,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   openGraph: {
     title: "Iqbal Attila | kcmon.id",
-    description:
-      "Cybersecurity enthusiast with part-time full-stack development experience.",
+    description: "Cybersecurity enthusiast with part-time full-stack development experience.",
     url: "https://kcmon.id",
     siteName: "kcmon.id",
     locale: "id_ID",
@@ -51,8 +42,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Iqbal Attila | kcmon.id",
-    description:
-      "Cybersecurity enthusiast with part-time full-stack development experience.",
+    description: "Cybersecurity enthusiast with part-time full-stack development experience.",
   },
 };
 
