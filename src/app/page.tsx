@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import data from "../data/data.json";
+import { CustomCursor } from "../components/CustomCursor";
 import { DecorColumn } from "../components/DecorColumn";
 import { Masthead } from "../components/Masthead";
 import { MetaColumn } from "../components/MetaColumn";
@@ -52,6 +53,7 @@ export default function App(): React.JSX.Element | null {
 
   return (
     <main className="relative min-h-[100dvh] w-full overflow-x-hidden bg-[var(--background)] text-[var(--foreground)]">
+      <CustomCursor />
       <PaperGrain />
       <Masthead profile={profile} theme={theme} onToggleTheme={toggleTheme} />
 

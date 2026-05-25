@@ -1,7 +1,7 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import type { JSX } from "react";
+import { useEffect, useRef, type JSX } from "react";
 import type { Profile } from "../types";
 
 interface MastheadProps {
@@ -11,10 +11,22 @@ interface MastheadProps {
 }
 
 export function Masthead({ profile, theme, onToggleTheme }: MastheadProps): JSX.Element {
+  const ref = useRef<HTMLElement | null>(null);
   const nameParts = profile.name.split(" ");
 
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    // Force reflow then trigger reveal so the keyframe restarts every mount
+    el.classList.remove("masthead--reveal");
+    void el.offsetWidth;
+    el.classList.add("masthead--reveal");
+  }, []);
+
   return (
-    <header className="masthead">
+    <header ref={ref} className="masthead">
       <div className="masthead__topbar">
         <span className="masthead__topbar-meta">
           <span>ISSUE {profile.issue.number}</span>
