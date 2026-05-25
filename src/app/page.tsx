@@ -8,7 +8,6 @@ import { Masthead } from "../components/Masthead";
 import { MetaColumn } from "../components/MetaColumn";
 import { PaperGrain } from "../components/PaperGrain";
 import { ProfileFooter } from "../components/ProfileFooter";
-import { PullQuote } from "../components/PullQuote";
 import { Section } from "../components/Section";
 import type { Data } from "../types";
 
@@ -67,7 +66,6 @@ export default function App(): React.JSX.Element | null {
         <DecorColumn issue={profile.issue} />
       </div>
 
-      <PullQuote text={profile.tagline} />
       <ProfileFooter profile={profile} />
     </main>
   );
