@@ -1,29 +1,33 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Instrument_Serif, JetBrains_Mono, Outfit } from "next/font/google";
+import { Bricolage_Grotesque, Fraunces, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
-  weight: "400",
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-instrument-serif",
-  style: "italic",
+  variable: "--font-display",
+  axes: ["opsz"],
+  display: "swap",
 });
 
-const outfit = Outfit({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-body",
+  axes: ["opsz", "SOFT"],
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kcmon.id"),
   title: "Iqbal Attila | kcmon.id",
-  description: "Cybersecurity enthusiast with part-time full-stack development experience.",
+  description:
+    "Secure by Design, Ship with Intent. Cybersecurity enthusiast and part-time full-stack engineer based in Jakarta.",
   keywords: ["Iqbal Attila", "cybersecurity", "developer", "portfolio", "full-stack", "Jakarta"],
   authors: [{ name: "Iqbal Attila" }],
   icons: {
@@ -33,7 +37,8 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   openGraph: {
     title: "Iqbal Attila | kcmon.id",
-    description: "Cybersecurity enthusiast with part-time full-stack development experience.",
+    description:
+      "Secure by Design, Ship with Intent. Cybersecurity enthusiast and part-time full-stack engineer based in Jakarta.",
     url: "https://kcmon.id",
     siteName: "kcmon.id",
     locale: "id_ID",
@@ -42,7 +47,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Iqbal Attila | kcmon.id",
-    description: "Cybersecurity enthusiast with part-time full-stack development experience.",
+    description:
+      "Secure by Design, Ship with Intent. Cybersecurity enthusiast and part-time full-stack engineer based in Jakarta.",
   },
 };
 
@@ -66,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="id" data-theme="dark" suppressHydrationWarning>
       <body
-        className={`${outfit.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${bricolage.variable} ${fraunces.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         {children}
