@@ -1,39 +1,39 @@
 import type { JSX } from "react";
-import type { Section as SectionType } from "../types";
+import type { Section as SectionData } from "../types";
 import { LinkRow } from "./LinkRow";
 
 interface SectionProps {
-  section: SectionType;
+  section: SectionData;
   sectionIndex: number;
   className?: string;
 }
 
-export function Section({ section, sectionIndex, className = "mb-16" }: SectionProps): JSX.Element {
-  const baseIndex = sectionIndex * 5;
-  const sectionNum = String(sectionIndex + 1).padStart(2, "0");
+function formatSectionNumber(i: number): string {
+  return i < 9 ? `0${i + 1}` : `${i + 1}`;
+}
 
+export function Section({ section, sectionIndex, className = "" }: SectionProps): JSX.Element {
   return (
-    <section className={className}>
-      <div
-        className="section-header animate-fade-up"
-        style={{ animationDelay: `${280 + sectionIndex * 70}ms` }}
-      >
-        <span
-          className="section-number animate-number"
-          style={{ animationDelay: `${320 + sectionIndex * 70}ms` }}
-        >
-          {sectionNum}
+    <section className={`section ${className}`.trim()} aria-labelledby={`section-${sectionIndex}`}>
+      <header className="section__header">
+        <span className="section__number animate-fade-up" style={{ animationDelay: "0ms" }}>
+          § {formatSectionNumber(sectionIndex)}
         </span>
-        <span className="section-title">{section.title}</span>
-        <div
-          className="section-rule animate-reveal-line"
-          style={{ animationDelay: `${360 + sectionIndex * 70}ms` }}
-        />
-      </div>
+        <h2 id={`section-${sectionIndex}`} className="section__title animate-fade-up" style={{ animationDelay: "60ms" }}>
+          {section.title}
+        </h2>
+        <span className="section__rule animate-reveal-line" style={{ animationDelay: "180ms" }} />
+      </header>
 
-      <div>
-        {section.items.map((item, idx) => (
-          <LinkRow key={item.label} item={item} index={baseIndex + idx} />
+      {section.intro ? (
+        <p className="section__intro animate-fade-up" style={{ animationDelay: "260ms" }}>
+          {section.intro}
+        </p>
+      ) : null}
+
+      <div className="section__list">
+        {section.items.map((item, i) => (
+          <LinkRow key={item.url + item.label} item={item} index={i} />
         ))}
       </div>
     </section>
