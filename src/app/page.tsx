@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import data from "../data/data.json";
+import { DecorColumn } from "../components/DecorColumn";
 import { Masthead } from "../components/Masthead";
+import { MetaColumn } from "../components/MetaColumn";
 import { PaperGrain } from "../components/PaperGrain";
 import { ProfileFooter } from "../components/ProfileFooter";
+import { PullQuote } from "../components/PullQuote";
 import { Section } from "../components/Section";
 import type { Data } from "../types";
 
@@ -52,13 +55,18 @@ export default function App(): React.JSX.Element | null {
       <PaperGrain />
       <Masthead profile={profile} theme={theme} onToggleTheme={toggleTheme} />
 
-      {/* Plan 2 will replace this section block with the editorial body grid. */}
-      <div className="relative z-10 mx-auto max-w-3xl px-6 py-16">
-        {sections.map((section, idx) => (
-          <Section key={section.title} section={section} sectionIndex={idx} />
-        ))}
-        <ProfileFooter profile={profile} />
+      <div className="body-grid">
+        <MetaColumn profile={profile} />
+        <div className="body-grid__center">
+          {sections.map((section, idx) => (
+            <Section key={section.title} section={section} sectionIndex={idx} />
+          ))}
+        </div>
+        <DecorColumn issue={profile.issue} />
       </div>
+
+      <PullQuote text={profile.tagline} />
+      <ProfileFooter profile={profile} />
     </main>
   );
 }
