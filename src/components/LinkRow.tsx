@@ -23,6 +23,7 @@ export function LinkRow({ item, index }: LinkRowProps): JSX.Element {
       target={item.external ? "_blank" : "_self"}
       rel={item.external ? "noopener noreferrer" : undefined}
       className={cls}
+      data-cursor="link"
       style={{ animationDelay: `${400 + index * 70}ms` }}
     >
       <span className="link-row__index" aria-hidden="true">
