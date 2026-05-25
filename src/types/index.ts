@@ -1,8 +1,16 @@
+export interface ProfileIssue {
+  number: string;
+  year: string;
+}
+
 export interface Profile {
   name: string;
   tagline: string;
+  subtitle: string;
   location: string;
   status: string;
+  role: string;
+  issue: ProfileIssue;
 }
 
 export interface Item {
@@ -15,6 +23,7 @@ export interface Item {
 
 export interface Section {
   title: string;
+  intro?: string;
   items: Item[];
 }
 

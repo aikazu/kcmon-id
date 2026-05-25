@@ -1,9 +1,15 @@
 {
   "profile": {
     "name": "Iqbal Attila",
-    "tagline": "Cybersecurity enthusiast with part-time full-stack development experience.",
+    "tagline": "Secure by Design, Ship with Intent.",
+    "subtitle": "Cybersecurity enthusiast with part-time full-stack development experience.",
     "location": "Jakarta, Indonesia",
-    "status": "Available for opportunities"
+    "status": "Available for opportunities",
+    "role": "Cybersecurity · Full-Stack",
+    "issue": {
+      "number": "Nº 04",
+      "year": "MMXXVI"
+    }
   },
   "sections": [
     {
